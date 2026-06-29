@@ -1,0 +1,542 @@
+﻿{
+    "updatedAt":  "2026-06-28T20:21:42",
+    "sourceFolder":  "E:\\C4D基础课程\\作品\\作品集-制作\\全部作品集\\主副图",
+    "groups":  [
+                   {
+                       "id":  "group-01",
+                       "name":  "01-06",
+                       "defaultActiveIndex":  0,
+                       "items":  [
+                                     {
+                                         "id":  "project-01",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-001.webp",
+                                         "detailUrl":  "/work/commerce/project-01",
+                                         "alt":  "__temp_0001",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0001.webp"
+                                     },
+                                     {
+                                         "id":  "project-02",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-002.webp",
+                                         "detailUrl":  "/work/commerce/project-02",
+                                         "alt":  "__temp_0002",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0002.webp"
+                                     },
+                                     {
+                                         "id":  "project-03",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-003.webp",
+                                         "detailUrl":  "/work/commerce/project-03",
+                                         "alt":  "__temp_0003",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0003.webp"
+                                     },
+                                     {
+                                         "id":  "project-04",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-004.webp",
+                                         "detailUrl":  "/work/commerce/project-04",
+                                         "alt":  "__temp_0004",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0004.webp"
+                                     },
+                                     {
+                                         "id":  "project-05",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-005.webp",
+                                         "detailUrl":  "/work/commerce/project-05",
+                                         "alt":  "__temp_0005",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0005.webp"
+                                     },
+                                     {
+                                         "id":  "project-06",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-006.webp",
+                                         "detailUrl":  "/work/commerce/project-06",
+                                         "alt":  "__temp_0006",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0006.webp"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "group-02",
+                       "name":  "07-12",
+                       "defaultActiveIndex":  0,
+                       "items":  [
+                                     {
+                                         "id":  "project-07",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-007.webp",
+                                         "detailUrl":  "/work/commerce/project-07",
+                                         "alt":  "__temp_0007",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0007.webp"
+                                     },
+                                     {
+                                         "id":  "project-08",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-008.webp",
+                                         "detailUrl":  "/work/commerce/project-08",
+                                         "alt":  "__temp_0008",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0008.webp"
+                                     },
+                                     {
+                                         "id":  "project-09",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-009.webp",
+                                         "detailUrl":  "/work/commerce/project-09",
+                                         "alt":  "__temp_0009",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0009.webp"
+                                     },
+                                     {
+                                         "id":  "project-10",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-010.webp",
+                                         "detailUrl":  "/work/commerce/project-10",
+                                         "alt":  "__temp_0010",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0010.webp"
+                                     },
+                                     {
+                                         "id":  "project-11",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-011.webp",
+                                         "detailUrl":  "/work/commerce/project-11",
+                                         "alt":  "__temp_0011",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0011.webp"
+                                     },
+                                     {
+                                         "id":  "project-12",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-012.png",
+                                         "detailUrl":  "/work/commerce/project-12",
+                                         "alt":  "__temp_0012",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0012.png"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "group-03",
+                       "name":  "13-18",
+                       "defaultActiveIndex":  0,
+                       "items":  [
+                                     {
+                                         "id":  "project-13",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-013.webp",
+                                         "detailUrl":  "/work/commerce/project-13",
+                                         "alt":  "__temp_0013",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0013.webp"
+                                     },
+                                     {
+                                         "id":  "project-14",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-014.webp",
+                                         "detailUrl":  "/work/commerce/project-14",
+                                         "alt":  "__temp_0014",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0014.webp"
+                                     },
+                                     {
+                                         "id":  "project-15",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-015.webp",
+                                         "detailUrl":  "/work/commerce/project-15",
+                                         "alt":  "__temp_0015",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0015.webp"
+                                     },
+                                     {
+                                         "id":  "project-16",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-016.webp",
+                                         "detailUrl":  "/work/commerce/project-16",
+                                         "alt":  "__temp_0016",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0016.webp"
+                                     },
+                                     {
+                                         "id":  "project-17",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-017.webp",
+                                         "detailUrl":  "/work/commerce/project-17",
+                                         "alt":  "__temp_0017",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0017.webp"
+                                     },
+                                     {
+                                         "id":  "project-18",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-018.webp",
+                                         "detailUrl":  "/work/commerce/project-18",
+                                         "alt":  "__temp_0018",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0018.webp"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "group-04",
+                       "name":  "19-24",
+                       "defaultActiveIndex":  0,
+                       "items":  [
+                                     {
+                                         "id":  "project-19",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-019.webp",
+                                         "detailUrl":  "/work/commerce/project-19",
+                                         "alt":  "__temp_0019",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0019.webp"
+                                     },
+                                     {
+                                         "id":  "project-20",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-020.webp",
+                                         "detailUrl":  "/work/commerce/project-20",
+                                         "alt":  "__temp_0020",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0020.webp"
+                                     },
+                                     {
+                                         "id":  "project-21",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-021.webp",
+                                         "detailUrl":  "/work/commerce/project-21",
+                                         "alt":  "__temp_0021",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0021.webp"
+                                     },
+                                     {
+                                         "id":  "project-22",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-022.webp",
+                                         "detailUrl":  "/work/commerce/project-22",
+                                         "alt":  "__temp_0022",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0022.webp"
+                                     },
+                                     {
+                                         "id":  "project-23",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-023.webp",
+                                         "detailUrl":  "/work/commerce/project-23",
+                                         "alt":  "__temp_0023",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0023.webp"
+                                     },
+                                     {
+                                         "id":  "project-24",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-024.jpg",
+                                         "detailUrl":  "/work/commerce/project-24",
+                                         "alt":  "__temp_0024",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0024.jpg"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "group-05",
+                       "name":  "25-30",
+                       "defaultActiveIndex":  0,
+                       "items":  [
+                                     {
+                                         "id":  "project-25",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-025.jpg",
+                                         "detailUrl":  "/work/commerce/project-25",
+                                         "alt":  "__temp_0025",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0025.jpg"
+                                     },
+                                     {
+                                         "id":  "project-26",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-026.jpg",
+                                         "detailUrl":  "/work/commerce/project-26",
+                                         "alt":  "__temp_0026",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0026.jpg"
+                                     },
+                                     {
+                                         "id":  "project-27",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-027.jpg",
+                                         "detailUrl":  "/work/commerce/project-27",
+                                         "alt":  "__temp_0027",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0027.jpg"
+                                     },
+                                     {
+                                         "id":  "project-28",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-028.jpg",
+                                         "detailUrl":  "/work/commerce/project-28",
+                                         "alt":  "__temp_0028",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0028.jpg"
+                                     },
+                                     {
+                                         "id":  "project-29",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-029.jpg",
+                                         "detailUrl":  "/work/commerce/project-29",
+                                         "alt":  "__temp_0029",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0029.jpg"
+                                     },
+                                     {
+                                         "id":  "project-30",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-030.jpg",
+                                         "detailUrl":  "/work/commerce/project-30",
+                                         "alt":  "__temp_0030",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0030.jpg"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "group-06",
+                       "name":  "31-36",
+                       "defaultActiveIndex":  0,
+                       "items":  [
+                                     {
+                                         "id":  "project-31",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-031.jpg",
+                                         "detailUrl":  "/work/commerce/project-31",
+                                         "alt":  "__temp_0031",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0031.jpg"
+                                     },
+                                     {
+                                         "id":  "project-32",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-032.jpg",
+                                         "detailUrl":  "/work/commerce/project-32",
+                                         "alt":  "__temp_0032",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0032.jpg"
+                                     },
+                                     {
+                                         "id":  "project-33",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-033.jpg",
+                                         "detailUrl":  "/work/commerce/project-33",
+                                         "alt":  "__temp_0033",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0033.jpg"
+                                     },
+                                     {
+                                         "id":  "project-34",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-034.jpg",
+                                         "detailUrl":  "/work/commerce/project-34",
+                                         "alt":  "__temp_0034",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0034.jpg"
+                                     },
+                                     {
+                                         "id":  "project-35",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-035.jpg",
+                                         "detailUrl":  "/work/commerce/project-35",
+                                         "alt":  "__temp_0035",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0035.jpg"
+                                     },
+                                     {
+                                         "id":  "project-36",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-036.jpg",
+                                         "detailUrl":  "/work/commerce/project-36",
+                                         "alt":  "__temp_0036",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0036.jpg"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "group-07",
+                       "name":  "37-42",
+                       "defaultActiveIndex":  0,
+                       "items":  [
+                                     {
+                                         "id":  "project-37",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-037.jpg",
+                                         "detailUrl":  "/work/commerce/project-37",
+                                         "alt":  "__temp_0037",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0037.jpg"
+                                     },
+                                     {
+                                         "id":  "project-38",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-038.jpg",
+                                         "detailUrl":  "/work/commerce/project-38",
+                                         "alt":  "__temp_0038",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0038.jpg"
+                                     },
+                                     {
+                                         "id":  "project-39",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-039.jpg",
+                                         "detailUrl":  "/work/commerce/project-39",
+                                         "alt":  "__temp_0039",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0039.jpg"
+                                     },
+                                     {
+                                         "id":  "project-40",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-040.jpg",
+                                         "detailUrl":  "/work/commerce/project-40",
+                                         "alt":  "__temp_0040",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0040.jpg"
+                                     },
+                                     {
+                                         "id":  "project-41",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-041.jpg",
+                                         "detailUrl":  "/work/commerce/project-41",
+                                         "alt":  "__temp_0041",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0041.jpg"
+                                     },
+                                     {
+                                         "id":  "project-42",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-042.jpg",
+                                         "detailUrl":  "/work/commerce/project-42",
+                                         "alt":  "__temp_0042",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0042.jpg"
+                                     }
+                                 ]
+                   },
+                   {
+                       "id":  "group-08",
+                       "name":  "43-48",
+                       "defaultActiveIndex":  0,
+                       "items":  [
+                                     {
+                                         "id":  "project-43",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-043.jpg",
+                                         "detailUrl":  "/work/commerce/project-43",
+                                         "alt":  "__temp_0043",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0043.jpg"
+                                     },
+                                     {
+                                         "id":  "project-44",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-044.jpg",
+                                         "detailUrl":  "/work/commerce/project-44",
+                                         "alt":  "__temp_0044",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0044.jpg"
+                                     },
+                                     {
+                                         "id":  "project-45",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-045.jpg",
+                                         "detailUrl":  "/work/commerce/project-45",
+                                         "alt":  "__temp_0045",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0045.jpg"
+                                     },
+                                     {
+                                         "id":  "project-46",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-046.jpg",
+                                         "detailUrl":  "/work/commerce/project-46",
+                                         "alt":  "__temp_0046",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0046.jpg"
+                                     },
+                                     {
+                                         "id":  "project-47",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-047.jpg",
+                                         "detailUrl":  "/work/commerce/project-47",
+                                         "alt":  "__temp_0047",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0047.jpg"
+                                     },
+                                     {
+                                         "id":  "project-48",
+                                         "image":  "/assets/commerce/works/import-20260628-202142-048.jpg",
+                                         "detailUrl":  "/work/commerce/project-48",
+                                         "alt":  "__temp_0048",
+                                         "objectFit":  "cover",
+                                         "objectPositionX":  50,
+                                         "objectPositionY":  50,
+                                         "originalFile":  "__temp_0048.jpg"
+                                     }
+                                 ]
+                   }
+               ]
+}

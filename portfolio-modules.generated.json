@@ -1,0 +1,786 @@
+﻿[
+    {
+        "id":  "rendering",
+        "title":  "产品商业渲染",
+        "tag":  "Product Rendering",
+        "desc":  "C4D / Octane 产品渲染、材质质感与商业构图练习，集中展示产品、场景和细节表现。",
+        "cover":  "/portfolio-full/rendering/rendering-01.jpg",
+        "meta":  "13 Works",
+        "works":  [
+                      {
+                          "title":  "0 1",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-01.jpg",
+                          "media":  "image",
+                          "size":  "long",
+                          "original":  "0-1.jpg"
+                      },
+                      {
+                          "title":  "0 2",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-02.jpg",
+                          "media":  "image",
+                          "size":  "long",
+                          "original":  "0-2.jpg"
+                      },
+                      {
+                          "title":  "2",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-03.png",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "2.png"
+                      },
+                      {
+                          "title":  "bj1 5",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-04.png",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "bj1-5.png"
+                      },
+                      {
+                          "title":  "摆件",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-05.jpg",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "摆件.jpg"
+                      },
+                      {
+                          "title":  "产品 耳机",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-06.jpg",
+                          "media":  "image",
+                          "size":  "wide",
+                          "original":  "产品-耳机.jpg"
+                      },
+                      {
+                          "title":  "产品 化妆品",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-07.jpg",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "产品-化妆品.jpg"
+                      },
+                      {
+                          "title":  "产品 咖啡机",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-08.jpg",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "产品-咖啡机.jpg"
+                      },
+                      {
+                          "title":  "产品 香水",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-09.jpg",
+                          "media":  "image",
+                          "size":  "long",
+                          "original":  "产品-香水.jpg"
+                      },
+                      {
+                          "title":  "超现实 机器人",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-10.jpg",
+                          "media":  "image",
+                          "size":  "long",
+                          "original":  "超现实-机器人.jpg"
+                      },
+                      {
+                          "title":  "手表（1）",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-11.jpg",
+                          "media":  "image",
+                          "size":  "wide",
+                          "original":  "手表（1）.jpg"
+                      },
+                      {
+                          "title":  "手表（2）",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-12.jpg",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "手表（2）.jpg"
+                      },
+                      {
+                          "title":  "主图",
+                          "tag":  "产品渲染",
+                          "src":  "/portfolio-full/rendering/rendering-13.jpg",
+                          "media":  "image",
+                          "size":  "long",
+                          "original":  "主图.jpg"
+                      }
+                  ]
+    },
+    {
+        "id":  "motion",
+        "title":  "产品动画",
+        "tag":  "Product Motion",
+        "desc":  "产品动态、镜头运镜与短视频成片内容，展示从模型、灯光到动画输出的动态视觉能力。",
+        "cover":  "/portfolio-full/motion/motion-01.mp4",
+        "meta":  "8 Works",
+        "works":  [
+                      {
+                          "title":  "9月19日",
+                          "tag":  "产品动画",
+                          "src":  "/portfolio-full/motion/motion-01.mp4",
+                          "media":  "video",
+                          "size":  "video",
+                          "original":  "9月19日.mp4"
+                      },
+                      {
+                          "title":  "9月30日",
+                          "tag":  "产品动画",
+                          "src":  "/portfolio-full/motion/motion-02.mp4",
+                          "media":  "video",
+                          "size":  "video",
+                          "original":  "9月30日.mp4"
+                      },
+                      {
+                          "title":  "动画3",
+                          "tag":  "产品动画",
+                          "src":  "/portfolio-full/motion/motion-03.mp4",
+                          "media":  "video",
+                          "size":  "video",
+                          "original":  "动画3.mp4"
+                      },
+                      {
+                          "title":  "动画4",
+                          "tag":  "产品动画",
+                          "src":  "/portfolio-full/motion/motion-04.mp4",
+                          "media":  "video",
+                          "size":  "video",
+                          "original":  "动画4.mp4"
+                      },
+                      {
+                          "title":  "合成 1 7",
+                          "tag":  "产品动画",
+                          "src":  "/portfolio-full/motion/motion-05.mp4",
+                          "media":  "video",
+                          "size":  "video",
+                          "original":  "合成 1_7.mp4"
+                      },
+                      {
+                          "title":  "完整2有音樂",
+                          "tag":  "产品动画",
+                          "src":  "/portfolio-full/motion/motion-06.mp4",
+                          "media":  "video",
+                          "size":  "video",
+                          "original":  "完整2有音樂.mp4"
+                      },
+                      {
+                          "title":  "小球动画",
+                          "tag":  "产品动画",
+                          "src":  "/portfolio-full/motion/motion-07.mp4",
+                          "media":  "video",
+                          "size":  "video",
+                          "original":  "小球动画.mp4"
+                      },
+                      {
+                          "title":  "音乐5版",
+                          "tag":  "产品动画",
+                          "src":  "/portfolio-full/motion/motion-08.mp4",
+                          "media":  "video",
+                          "size":  "video",
+                          "original":  "音乐5版.mp4"
+                      }
+                  ]
+    },
+    {
+        "id":  "commerce",
+        "title":  "电商产品视觉",
+        "tag":  "E-commerce Visual",
+        "desc":  "围绕三角充、红白机、小包等产品系列制作主图、卖点图和平台商品视觉。",
+        "cover":  "/portfolio-full/commerce/commerce-01.webp",
+        "meta":  "20 Works",
+        "works":  [
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "红白机",
+                          "src":  "/portfolio-full/commerce/commerce-01.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01DSEnJS1KhooHrsiWm_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图 ",
+                          "tag":  "红白机",
+                          "src":  "/portfolio-full/commerce/commerce-02.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01EPZhAo1KhonZbASwz_!!2217560201196.png_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "红白机",
+                          "src":  "/portfolio-full/commerce/commerce-03.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01Pi3p2S1KhooHe5fdT_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "红白机",
+                          "src":  "/portfolio-full/commerce/commerce-04.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01RmleFq1KhooJIhnqU_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "红白机",
+                          "src":  "/portfolio-full/commerce/commerce-05.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01uS4S0o1KhooCz0Wrz_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "红白机",
+                          "src":  "/portfolio-full/commerce/commerce-06.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01ZD4djo1KhooJIjXuu_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "安装步骤1",
+                          "tag":  "红白机",
+                          "src":  "/portfolio-full/commerce/commerce-07.png",
+                          "media":  "image",
+                          "size":  "wide",
+                          "original":  "安装步骤1.png"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "三角充",
+                          "src":  "/portfolio-full/commerce/commerce-08.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01MrRSSH1KhooRKCty0_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "三角充",
+                          "src":  "/portfolio-full/commerce/commerce-09.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01p3KiL71KhooRcXqL9_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "三角充",
+                          "src":  "/portfolio-full/commerce/commerce-10.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01pw6dvT1KhooRafXKx_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "三角充",
+                          "src":  "/portfolio-full/commerce/commerce-11.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01vH2fAf1KhooRubOAc_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "三角充",
+                          "src":  "/portfolio-full/commerce/commerce-12.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01zm1CiR1KhooSTT4Pn_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "主图 透明底",
+                          "tag":  "三角充",
+                          "src":  "/portfolio-full/commerce/commerce-13.png",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "主图-透明底.png"
+                      },
+                      {
+                          "title":  "0 1 0001",
+                          "tag":  "小包",
+                          "src":  "/portfolio-full/commerce/commerce-14.png",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "0-1_0001.png"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "小包",
+                          "src":  "/portfolio-full/commerce/commerce-15.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01aHSS2s1KhooJZQFuz_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "小包",
+                          "src":  "/portfolio-full/commerce/commerce-16.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01hxRuOX1KhooJ2hhIn_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "小包",
+                          "src":  "/portfolio-full/commerce/commerce-17.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01mQH2XK1KhooJXAwuV_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "小包",
+                          "src":  "/portfolio-full/commerce/commerce-18.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01o7lcJ31KhooJDvLhs_!!2217560201196.png_q50.jpg_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图 ",
+                          "tag":  "小包",
+                          "src":  "/portfolio-full/commerce/commerce-19.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01OowsE21Khong5YvIM_!!2217560201196.png_.webp"
+                      },
+                      {
+                          "title":  "电商卖点图",
+                          "tag":  "小包",
+                          "src":  "/portfolio-full/commerce/commerce-20.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "O1CN01RP4x8d1KhooJ2gYcX_!!2217560201196.png_q50.jpg_.webp"
+                      }
+                  ]
+    },
+    {
+        "id":  "site",
+        "title":  "独立站视觉",
+        "tag":  "Independent Site",
+        "desc":  "面向独立站与产品详情页的页面视觉，包括首页、产品页、卖点图和长页面内容。",
+        "cover":  "/portfolio-full/site/site-01.webp",
+        "meta":  "16 Works",
+        "works":  [
+                      {
+                          "title":  "hosanwell hc ps5001wh ps5 controll...",
+                          "tag":  "独立站 / 白色ps5",
+                          "src":  "/portfolio-full/site/site-01.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "hosanwell-hc-ps5001wh-ps5-controller-charging-station_webp.webp"
+                      },
+                      {
+                          "title":  "hosanwell hc ps5001wh ps5 disc dig...",
+                          "tag":  "独立站 / 白色ps5",
+                          "src":  "/portfolio-full/site/site-02.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "hosanwell-hc-ps5001wh-ps5-disc-digital-wall-mount-compatible_webp.webp"
+                      },
+                      {
+                          "title":  "hosanwell hc ps5001wh ps5 wall mou...",
+                          "tag":  "独立站 / 白色ps5",
+                          "src":  "/portfolio-full/site/site-03.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "hosanwell-hc-ps5001wh-ps5-wall-mount-bracket-secure_webp.webp"
+                      },
+                      {
+                          "title":  "hosanwell hc ps5001wh ps5 wall mou...",
+                          "tag":  "独立站 / 白色ps5",
+                          "src":  "/portfolio-full/site/site-04.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "hosanwell-hc-ps5001wh-ps5-wall-mount-easy-installation_webp.webp"
+                      },
+                      {
+                          "title":  "hosanwell hc ps5001wh ps5 wall mou...",
+                          "tag":  "独立站 / 白色ps5",
+                          "src":  "/portfolio-full/site/site-05.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "hosanwell-hc-ps5001wh-ps5-wall-mount-installation-guide_webp.webp"
+                      },
+                      {
+                          "title":  "hosanwell hc ps5001wh ps5 wall mou...",
+                          "tag":  "独立站 / 白色ps5",
+                          "src":  "/portfolio-full/site/site-06.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "hosanwell-hc-ps5001wh-ps5-wall-mount-kit-white_webp.webp"
+                      },
+                      {
+                          "title":  "hosanwell hc ps5001wh wall mounted...",
+                          "tag":  "独立站 / 白色ps5",
+                          "src":  "/portfolio-full/site/site-07.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "hosanwell-hc-ps5001wh-wall-mounted-ps5-living-room-setup_webp.webp"
+                      },
+                      {
+                          "title":  "Airflow friendly PS5 wall mount wi...",
+                          "tag":  "独立站 / 白色ps5 / 详情页",
+                          "src":  "/portfolio-full/site/site-08.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "Airflow-friendly_PS5_wall_mount_with_open_structure_for_better_heat_dissipation_170c4c47-d534-4c6d-a589-2e36aa8e569f.webp"
+                      },
+                      {
+                          "title":  "Before and after comparison of a c...",
+                          "tag":  "独立站 / 白色ps5 / 详情页",
+                          "src":  "/portfolio-full/site/site-09.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "Before_and_after_comparison_of_a_cluttered_gaming_desk_and_a_clean_PS5_wall_mount_setup_1.webp"
+                      },
+                      {
+                          "title":  "Compatibility chart for PS5 PS5 Sl...",
+                          "tag":  "独立站 / 白色ps5 / 详情页",
+                          "src":  "/portfolio-full/site/site-10.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "Compatibility_chart_for_PS5_PS5_Slim_and_PS5_Pro_disc_and_digital_models_ce78d4e1-407c-4437-913d-fe8156ecf2d5.webp"
+                      },
+                      {
+                          "title":  "Hosanwell white PS5 wall mount kit...",
+                          "tag":  "独立站 / 白色ps5 / 详情页",
+                          "src":  "/portfolio-full/site/site-11.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "Hosanwell_white_PS5_wall_mount_kit_with_charging_station_RGB_lighting_airflow_support_and_compatibility_for_PS5_Slim_and_PS5_Pro_64150a90-15e6-407f-936f-53beb1225471.webp"
+                      },
+                      {
+                          "title":  "Step by step installation guide fo...",
+                          "tag":  "独立站 / 白色ps5 / 详情页",
+                          "src":  "/portfolio-full/site/site-12.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "Step-by-step_installation_guide_for_the_Hosanwell_PS5_wall_mount_kit_with_charging_station_c39e3033-12ba-4bd6-bf5f-479965221f93.webp"
+                      },
+                      {
+                          "title":  "White PS5 wall mount with RGB ligh...",
+                          "tag":  "独立站 / 白色ps5 / 详情页",
+                          "src":  "/portfolio-full/site/site-13.webp",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "White_PS5_wall_mount_with_RGB_light_modes_for_a_clean_gaming_room_setup_e7eb57fa-03f9-4e3f-92ab-0e708fd2a53d.webp"
+                      },
+                      {
+                          "title":  "白色PS5",
+                          "tag":  "独立站 / 独立站-产品页面",
+                          "src":  "/portfolio-full/site/site-14.png",
+                          "media":  "image",
+                          "size":  "long",
+                          "original":  "白色PS5.png"
+                      },
+                      {
+                          "title":  "黑色PS5",
+                          "tag":  "独立站 / 独立站-产品页面",
+                          "src":  "/portfolio-full/site/site-15.png",
+                          "media":  "image",
+                          "size":  "long",
+                          "original":  "黑色PS5.png"
+                      },
+                      {
+                          "title":  "主页效果",
+                          "tag":  "独立站 / 独立站-产品页面",
+                          "src":  "/portfolio-full/site/site-16.png",
+                          "media":  "image",
+                          "size":  "long",
+                          "original":  "主页效果.png"
+                      }
+                  ]
+    },
+    {
+        "id":  "aigc",
+        "title":  "AIGC 人物概念",
+        "tag":  "AIGC Character",
+        "desc":  "AI 人物视觉、产品佩戴场景和概念画面探索，强调商业质感与视觉叙事。",
+        "cover":  "/portfolio-full/aigc/aigc-01.png",
+        "meta":  "6 Works",
+        "works":  [
+                      {
+                          "title":  "PS5挂架游戏画面版",
+                          "tag":  "AIGC-人物",
+                          "src":  "/portfolio-full/aigc/aigc-01.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "PS5挂架游戏画面版.png"
+                      },
+                      {
+                          "title":  "高清",
+                          "tag":  "AIGC-人物",
+                          "src":  "/portfolio-full/aigc/aigc-02.png",
+                          "media":  "image",
+                          "size":  "long",
+                          "original":  "高清.png"
+                      },
+                      {
+                          "title":  "手部展示 0",
+                          "tag":  "AIGC-人物",
+                          "src":  "/portfolio-full/aigc/aigc-03.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "手部展示-0.png"
+                      },
+                      {
+                          "title":  "手部展示 1",
+                          "tag":  "AIGC-人物",
+                          "src":  "/portfolio-full/aigc/aigc-04.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "手部展示-1.png"
+                      },
+                      {
+                          "title":  "效果图",
+                          "tag":  "AIGC-人物",
+                          "src":  "/portfolio-full/aigc/aigc-05.jpg",
+                          "media":  "image",
+                          "size":  "long",
+                          "original":  "效果图.jpg"
+                      },
+                      {
+                          "title":  "修过的",
+                          "tag":  "AIGC-人物",
+                          "src":  "/portfolio-full/aigc/aigc-06.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "修过的.png"
+                      }
+                  ]
+    },
+    {
+        "id":  "posters",
+        "title":  "海报视觉",
+        "tag":  "Poster Design",
+        "desc":  "AI 辅助生成的竖版海报和概念视觉，适配社媒传播与活动视觉场景。",
+        "cover":  "/portfolio-full/posters/posters-01.png",
+        "meta":  "14 Works",
+        "works":  [
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 20 59",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-01.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_20_59.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 21 51",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-02.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_21_51.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 21 56",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-03.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_21_56.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 22 00",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-04.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_22_00.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 22 11",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-05.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_22_11.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 29 16",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-06.png",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "ChatGPT Image 2026年6月16日 12_29_16.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 29 21",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-07.png",
+                          "media":  "image",
+                          "size":  "",
+                          "original":  "ChatGPT Image 2026年6月16日 12_29_21.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 30 21",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-08.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_30_21.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 30 25",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-09.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_30_25.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 30 28",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-10.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_30_28.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 34 18",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-11.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_34_18.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 34 54",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-12.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_34_54.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 35 10",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-13.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_35_10.png"
+                      },
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 35 14",
+                          "tag":  "海报",
+                          "src":  "/portfolio-full/posters/posters-14.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_35_14.png"
+                      }
+                  ]
+    },
+    {
+        "id":  "covers",
+        "title":  "视频封面与社媒图",
+        "tag":  "Cover / Social Visual",
+        "desc":  "视频封面、短视频首帧和社媒视觉图，突出点击识别度和产品记忆点。",
+        "cover":  "/portfolio-full/covers/covers-01.png",
+        "meta":  "9 Works",
+        "works":  [
+                      {
+                          "title":  "AI视觉 2026年6月16日 12 19 30",
+                          "tag":  "视频封面",
+                          "src":  "/portfolio-full/covers/covers-01.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "ChatGPT Image 2026年6月16日 12_19_30.png"
+                      },
+                      {
+                          "title":  "PS5极简高级封面",
+                          "tag":  "视频封面",
+                          "src":  "/portfolio-full/covers/covers-02.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "PS5极简高级封面.png"
+                      },
+                      {
+                          "title":  "SW2充电底座 三款合集 极简场景",
+                          "tag":  "视频封面",
+                          "src":  "/portfolio-full/covers/covers-03.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "SW2充电底座_三款合集_极简场景.png"
+                      },
+                      {
+                          "title":  "SW2握把极简高级封面",
+                          "tag":  "视频封面",
+                          "src":  "/portfolio-full/covers/covers-04.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "SW2握把极简高级封面.png"
+                      },
+                      {
+                          "title":  "Switch2红白机握把产品图 (1)",
+                          "tag":  "视频封面",
+                          "src":  "/portfolio-full/covers/covers-05.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "Switch2红白机握把产品图 (1).png"
+                      },
+                      {
+                          "title":  "Switch2红白机握把产品图 (2)",
+                          "tag":  "视频封面",
+                          "src":  "/portfolio-full/covers/covers-06.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "Switch2红白机握把产品图 (2).png"
+                      },
+                      {
+                          "title":  "Switch2红白机握把产品图",
+                          "tag":  "视频封面",
+                          "src":  "/portfolio-full/covers/covers-07.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "Switch2红白机握把产品图.png"
+                      },
+                      {
+                          "title":  "Switch2红白机握把产品图1",
+                          "tag":  "视频封面",
+                          "src":  "/portfolio-full/covers/covers-08.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "Switch2红白机握把产品图1.png"
+                      },
+                      {
+                          "title":  "极简高级视频封面图",
+                          "tag":  "视频封面",
+                          "src":  "/portfolio-full/covers/covers-09.png",
+                          "media":  "image",
+                          "size":  "tall",
+                          "original":  "极简高级视频封面图.png"
+                      }
+                  ]
+    },
+    {
+        "id":  "longform",
+        "title":  "长图详情页",
+        "tag":  "Long-form Detail Page",
+        "desc":  "长图详情页与动态详情页内容，适合纵向浏览产品卖点、功能和使用场景。",
+        "cover":  "/portfolio-full/longform/longform-01.gif",
+        "meta":  "2 Works",
+        "works":  [
+                      {
+                          "title":  "最新的详情页 修改 01",
+                          "tag":  "小米音箱 / 详情页",
+                          "src":  "/portfolio-full/longform/longform-01.gif",
+                          "media":  "gif",
+                          "size":  "long",
+                          "original":  "最新的详情页---修改_01.gif"
+                      },
+                      {
+                          "title":  "最新的详情页 修改 02",
+                          "tag":  "小米音箱 / 详情页",
+                          "src":  "/portfolio-full/longform/longform-02.gif",
+                          "media":  "gif",
+                          "size":  "long",
+                          "original":  "最新的详情页---修改_02.gif"
+                      }
+                  ]
+    }
+]

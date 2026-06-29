@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1280" viewBox="0 0 980 1280">
+  <rect width="980" height="1280" fill="#fff"/>
+  <g fill="none" stroke="#d7dde0" stroke-width="2">
+    <path d="M176 210h628v628H176z"/>
+    <path d="M176 524h628M490 210v628"/>
+  </g>
+  <g fill="#101820">
+    <circle cx="490" cy="524" r="118" opacity=".9"/>
+    <circle cx="336" cy="370" r="38" opacity=".72"/>
+    <circle cx="646" cy="370" r="52" opacity=".52"/>
+    <circle cx="326" cy="682" r="58" opacity=".38"/>
+    <circle cx="648" cy="684" r="36" opacity=".65"/>
+  </g>
+  <g stroke="#b8f3ff" stroke-width="3" opacity=".9">
+    <path d="M336 370l154 154 156-154M490 524 326 682M490 524l158 160"/>
+  </g>
+  <rect x="176" y="936" width="274" height="28" fill="#111820"/>
+  <rect x="176" y="1000" width="628" height="18" fill="#cbd2d4"/>
+  <rect x="176" y="1044" width="504" height="18" fill="#dce1e2"/>
+  <text x="176" y="1136" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#111820">AI CONCEPT SYSTEM</text>
+</svg>

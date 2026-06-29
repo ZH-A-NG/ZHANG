@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1280" viewBox="0 0 980 1280">
+  <rect width="980" height="1280" fill="#f8f8f5"/>
+  <rect x="80" y="92" width="820" height="1096" fill="#fff" stroke="#d6dcdf" stroke-width="2"/>
+  <rect x="148" y="166" width="684" height="376" fill="#eef1ef"/>
+  <circle cx="490" cy="354" r="138" fill="#dfe8e9"/>
+  <rect x="148" y="608" width="416" height="36" fill="#111820"/>
+  <rect x="148" y="676" width="684" height="20" fill="#b7c2c6"/>
+  <rect x="148" y="724" width="568" height="20" fill="#cbd2d4"/>
+  <rect x="148" y="820" width="196" height="196" fill="#eef1ef"/>
+  <rect x="392" y="820" width="196" height="196" fill="#eef1ef"/>
+  <rect x="636" y="820" width="196" height="196" fill="#eef1ef"/>
+  <text x="148" y="1110" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#111820">E-COMMERCE VISUAL</text>
+</svg>

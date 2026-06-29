@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="1280" viewBox="0 0 980 1280">
+  <rect width="980" height="1280" fill="#f9faf8"/>
+  <defs>
+    <linearGradient id="metal" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".45" stop-color="#cfd8db"/>
+      <stop offset="1" stop-color="#737f85"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="490" cy="902" rx="270" ry="46" fill="#dfe4e5"/>
+  <path d="M490 256 760 414v314L490 886 220 728V414z" fill="url(#metal)" stroke="#c8d0d4" stroke-width="3"/>
+  <path d="M490 256v314l270-156M490 570 220 414" fill="none" stroke="#fff" stroke-width="3" opacity=".7"/>
+  <path d="M220 728l270-158 270 158" fill="none" stroke="#68747a" stroke-width="3" opacity=".35"/>
+  <rect x="168" y="104" width="642" height="60" fill="#111820"/>
+  <rect x="168" y="1010" width="360" height="28" fill="#111820"/>
+  <rect x="168" y="1074" width="642" height="18" fill="#cbd2d4"/>
+  <text x="168" y="1162" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#111820">3D PRODUCT RENDER</text>
+</svg>
