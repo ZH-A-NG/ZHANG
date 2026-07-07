@@ -1,10 +1,9 @@
-﻿import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import { useRef } from "react";
 import { Suspense, useCallback, useMemo } from "react";
 import { createRoot } from "react-dom/client";
-import { Canvas } from "@react-three/fiber";
-import { Bounds, Center, OrbitControls, useGLTF } from "@react-three/drei";
-import * as THREE from "three";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -17,8 +16,27 @@ import {
   Phone,
 } from "lucide-react";
 import commerceWorksData from "./data/commerceWorks.json";
-import Lanyard from "./components/ui/Lanyard/Lanyard";
 import "./styles.css";
+
+const Lanyard = lazy(() => import("./components/lanyard/Lanyard.jsx"));
+const CommerceShowcase = lazy(() => import("./components/CommerceShowcase.jsx"));
+
+gsap.registerPlugin(ScrollTrigger);
+
+window.addEventListener("vite:preloadError", (event) => {
+  event.preventDefault();
+  window.location.reload();
+});
+
+function forceTopScrollState() {
+  ScrollTrigger.clearScrollMemory("manual");
+  if ("scrollRestoration" in window.history) {
+    window.history.scrollRestoration = "manual";
+  }
+  window.scrollTo(0, 0);
+}
+
+forceTopScrollState();
 
 const commerceDetailBasePath = "/work/commerce";
 
@@ -39,10 +57,11 @@ const stats = [
 const portfolioModules = [
   {
     "id": "rendering",
-    "title": "产品商业渲染",
+    "title": "产品渲染",
     "tag": "Product Rendering",
     "desc": "C4D / Octane 产品渲染、材质质感与商业构图练习，集中展示产品、场景和细节表现。",
-    "meta": "13 Works",
+    "cover": "/portfolio-full/rendering/rendering-01.jpg",
+    "meta": "28 Works",
     "works": [
       {
         "title": "0 1",
@@ -61,73 +80,161 @@ const portfolioModules = [
         "original": "0-2.jpg"
       },
       {
-        "title": "2",
+        "title": "001.2版本 按摩椅",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-03.png",
+        "src": "/portfolio-full/rendering/rendering-03.webp",
         "media": "image",
-        "size": "",
-        "original": "2.png"
+        "size": "wide",
+        "original": "001.2版本-按摩椅.png"
+      },
+      {
+        "title": "05",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-04.png",
+        "media": "image",
+        "size": "wide",
+        "original": "05.png"
+      },
+      {
+        "title": "06(1)",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-05.png",
+        "media": "image",
+        "size": "wide",
+        "original": "06(1).png"
+      },
+      {
+        "title": "06",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-06.png",
+        "media": "image",
+        "size": "wide",
+        "original": "06.png"
+      },
+      {
+        "title": "1 1",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-07.jpg",
+        "media": "image",
+        "size": "wide",
+        "original": "1-1.jpg"
+      },
+      {
+        "title": "1oc",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-08.jpg",
+        "media": "image",
+        "size": "tall",
+        "original": "1oc.jpg"
       },
       {
         "title": "bj1 5",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-04.png",
+        "src": "/portfolio-full/rendering/rendering-09.png",
         "media": "image",
         "size": "",
         "original": "bj1-5.png"
       },
       {
-        "title": "摆件",
+        "title": "Rs渲染",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-05.jpg",
+        "src": "/portfolio-full/rendering/rendering-10.jpg",
         "media": "image",
-        "size": "",
-        "original": "摆件.jpg"
+        "size": "tall",
+        "original": "Rs渲染.jpg"
       },
       {
-        "title": "产品 耳机",
+        "title": "xr1",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-06.jpg",
+        "src": "/portfolio-full/rendering/rendering-11.png",
+        "media": "image",
+        "size": "",
+        "original": "xr1.png"
+      },
+      {
+        "title": "主图 (0 00 15 02)",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-12.jpg",
         "media": "image",
         "size": "wide",
-        "original": "产品-耳机.jpg"
+        "original": "主图 (0-00-15-02).jpg"
+      },
+      {
+        "title": "主图",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-13.jpg",
+        "media": "image",
+        "size": "tall",
+        "original": "主图.jpg"
       },
       {
         "title": "产品 化妆品",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-07.jpg",
+        "src": "/portfolio-full/rendering/rendering-14.jpg",
         "media": "image",
-        "size": "tall",
+        "size": "long",
         "original": "产品-化妆品.jpg"
       },
       {
         "title": "产品 咖啡机",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-08.jpg",
+        "src": "/portfolio-full/rendering/rendering-15.jpg",
         "media": "image",
-        "size": "tall",
+        "size": "long",
         "original": "产品-咖啡机.jpg"
+      },
+      {
+        "title": "产品 耳机",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-16.jpg",
+        "media": "image",
+        "size": "wide",
+        "original": "产品-耳机.jpg"
       },
       {
         "title": "产品 香水",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-09.jpg",
+        "src": "/portfolio-full/rendering/rendering-17.jpg",
         "media": "image",
         "size": "long",
         "original": "产品-香水.jpg"
       },
       {
-        "title": "超现实 机器人",
+        "title": "参考",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-10.jpg",
+        "src": "/portfolio-full/rendering/rendering-18.jpg",
+        "media": "image",
+        "size": "wide",
+        "original": "参考.jpg"
+      },
+      {
+        "title": "后期调整",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-19.jpg",
+        "media": "image",
+        "size": "tall",
+        "original": "后期调整.jpg"
+      },
+      {
+        "title": "后期调色",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-20.jpg",
         "media": "image",
         "size": "long",
-        "original": "超现实-机器人.jpg"
+        "original": "后期调色.jpg"
+      },
+      {
+        "title": "小音箱",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-21.png",
+        "media": "image",
+        "size": "wide",
+        "original": "小音箱.png"
       },
       {
         "title": "手表（1）",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-11.jpg",
+        "src": "/portfolio-full/rendering/rendering-22.jpg",
         "media": "image",
         "size": "wide",
         "original": "手表（1）.jpg"
@@ -135,26 +242,60 @@ const portfolioModules = [
       {
         "title": "手表（2）",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-12.jpg",
+        "src": "/portfolio-full/rendering/rendering-23.jpg",
         "media": "image",
         "size": "tall",
         "original": "手表（2）.jpg"
       },
       {
-        "title": "主图",
+        "title": "摆件",
         "tag": "产品渲染",
-        "src": "/portfolio-full/rendering/rendering-13.jpg",
+        "src": "/portfolio-full/rendering/rendering-24.jpg",
+        "media": "image",
+        "size": "tall",
+        "original": "摆件.jpg"
+      },
+      {
+        "title": "测试质感2",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-25.webp",
+        "media": "image",
+        "size": "tall",
+        "original": "测试质感2.png"
+      },
+      {
+        "title": "电饭煲后期",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-26.jpg",
+        "media": "image",
+        "size": "wide",
+        "original": "电饭煲后期.jpg"
+      },
+      {
+        "title": "超现实 机器人",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-27.jpg",
         "media": "image",
         "size": "long",
-        "original": "主图.jpg"
+        "original": "超现实-机器人.jpg"
+      },
+      {
+        "title": "风扇海报渲染输出",
+        "tag": "产品渲染",
+        "src": "/portfolio-full/rendering/rendering-28.webp",
+        "media": "image",
+        "size": "long",
+        "original": "风扇海报渲染输出.png"
       }
     ]
   },
+
   {
     "id": "motion",
     "title": "产品动画",
     "tag": "Product Motion",
     "desc": "产品动态、镜头运镜与短视频成片内容，展示从模型、灯光到动画输出的动态视觉能力。",
+    "cover": "/portfolio-full/motion/motion-01.mp4",
     "meta": "8 Works",
     "works": [
       {
@@ -225,598 +366,810 @@ const portfolioModules = [
   },
   {
     "id": "commerce",
-    "title": "电商产品视觉",
+    "title": "电商主副图",
     "tag": "E-commerce Visual",
     "desc": "围绕三角充、红白机、小包等产品系列制作主图、卖点图和平台商品视觉。",
-    "coverSrc": "/portfolio-full/commerce/commerce-07.png",
-    "meta": "20 Works",
+    "cover": "/portfolio-full/commerce/commerce-01.jpg",
+    "meta": "60 Works",
     "works": [
       {
-        "title": "电商卖点图",
-        "tag": "红白机",
-        "src": "/portfolio-full/commerce/commerce-01.webp",
+        "title": " temp 0000 0",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-01.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01DSEnJS1KhooHrsiWm_!!2217560201196.png_q50.jpg_.webp"
+        "original": "__temp_0000-0.jpg"
       },
       {
-        "title": "电商卖点图 ",
-        "tag": "红白机",
-        "src": "/portfolio-full/commerce/commerce-02.webp",
+        "title": " temp 0000 1",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-02.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01EPZhAo1KhonZbASwz_!!2217560201196.png_.webp"
+        "original": "__temp_0000-1.jpg"
       },
       {
-        "title": "电商卖点图",
-        "tag": "红白机",
-        "src": "/portfolio-full/commerce/commerce-03.webp",
+        "title": " temp 0000",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-03.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01Pi3p2S1KhooHe5fdT_!!2217560201196.png_q50.jpg_.webp"
+        "original": "__temp_0000.jpg"
       },
       {
-        "title": "电商卖点图",
-        "tag": "红白机",
-        "src": "/portfolio-full/commerce/commerce-04.webp",
+        "title": " temp 0000 2",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-04.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01RmleFq1KhooJIhnqU_!!2217560201196.png_q50.jpg_.webp"
+        "original": "__temp_0000-2.jpg"
       },
       {
-        "title": "电商卖点图",
-        "tag": "红白机",
-        "src": "/portfolio-full/commerce/commerce-05.webp",
+        "title": " temp 0000 3",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-05.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01uS4S0o1KhooCz0Wrz_!!2217560201196.png_q50.jpg_.webp"
+        "original": "__temp_0000-3.jpg"
       },
       {
-        "title": "电商卖点图",
-        "tag": "红白机",
-        "src": "/portfolio-full/commerce/commerce-06.webp",
+        "title": " temp 0000 4",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-06.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01ZD4djo1KhooJIjXuu_!!2217560201196.png_q50.jpg_.webp"
+        "original": "__temp_0000-4.jpg"
       },
       {
-        "title": "安装步骤1",
-        "tag": "红白机",
+        "title": " temp 0000 5",
+        "tag": "电商产品视觉",
         "src": "/portfolio-full/commerce/commerce-07.png",
         "media": "image",
-        "size": "wide",
-        "original": "安装步骤1.png"
+        "size": "tall",
+        "original": "__temp_0000-5.png"
       },
       {
-        "title": "电商卖点图",
-        "tag": "三角充",
-        "src": "/portfolio-full/commerce/commerce-08.webp",
+        "title": " temp 0000 6",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-08.png",
         "media": "image",
-        "size": "",
-        "original": "O1CN01MrRSSH1KhooRKCty0_!!2217560201196.png_q50.jpg_.webp"
+        "size": "tall",
+        "original": "__temp_0000-6.png"
       },
       {
-        "title": "电商卖点图",
-        "tag": "三角充",
-        "src": "/portfolio-full/commerce/commerce-09.webp",
+        "title": " temp 0000 7",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-09.png",
         "media": "image",
-        "size": "",
-        "original": "O1CN01p3KiL71KhooRcXqL9_!!2217560201196.png_q50.jpg_.webp"
+        "size": "tall",
+        "original": "__temp_0000-7.png"
       },
       {
-        "title": "电商卖点图",
-        "tag": "三角充",
-        "src": "/portfolio-full/commerce/commerce-10.webp",
+        "title": " temp 0000 8",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-10.png",
         "media": "image",
-        "size": "",
-        "original": "O1CN01pw6dvT1KhooRafXKx_!!2217560201196.png_q50.jpg_.webp"
+        "size": "tall",
+        "original": "__temp_0000-8.png"
       },
       {
-        "title": "电商卖点图",
-        "tag": "三角充",
-        "src": "/portfolio-full/commerce/commerce-11.webp",
+        "title": " temp 0000 9",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-11.png",
         "media": "image",
-        "size": "",
-        "original": "O1CN01vH2fAf1KhooRubOAc_!!2217560201196.png_q50.jpg_.webp"
+        "size": "tall",
+        "original": "__temp_0000-9.png"
       },
       {
-        "title": "电商卖点图",
-        "tag": "三角充",
-        "src": "/portfolio-full/commerce/commerce-12.webp",
+        "title": " temp 0000 10",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-12.png",
         "media": "image",
-        "size": "",
-        "original": "O1CN01zm1CiR1KhooSTT4Pn_!!2217560201196.png_q50.jpg_.webp"
+        "size": "tall",
+        "original": "__temp_0000-10.png"
       },
       {
-        "title": "主图 透明底",
-        "tag": "三角充",
-        "src": "/portfolio-full/commerce/commerce-13.png",
+        "title": " temp 0001",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-13.jpg",
         "media": "image",
         "size": "",
-        "original": "主图-透明底.png"
+        "original": "__temp_0001.jpg"
       },
       {
-        "title": "0 1 0001",
-        "tag": "小包",
-        "src": "/portfolio-full/commerce/commerce-14.png",
+        "title": " temp 0002",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-14.jpg",
         "media": "image",
         "size": "",
-        "original": "0-1_0001.png"
+        "original": "__temp_0002.jpg"
       },
       {
-        "title": "电商卖点图",
-        "tag": "小包",
-        "src": "/portfolio-full/commerce/commerce-15.webp",
+        "title": " temp 0003",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-15.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01aHSS2s1KhooJZQFuz_!!2217560201196.png_q50.jpg_.webp"
+        "original": "__temp_0003.jpg"
       },
       {
-        "title": "电商卖点图",
-        "tag": "小包",
-        "src": "/portfolio-full/commerce/commerce-16.webp",
+        "title": " temp 0004",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-16.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01hxRuOX1KhooJ2hhIn_!!2217560201196.png_q50.jpg_.webp"
+        "original": "__temp_0004.jpg"
       },
       {
-        "title": "电商卖点图",
-        "tag": "小包",
-        "src": "/portfolio-full/commerce/commerce-17.webp",
+        "title": " temp 0005",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-17.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01mQH2XK1KhooJXAwuV_!!2217560201196.png_q50.jpg_.webp"
+        "original": "__temp_0005.jpg"
       },
       {
-        "title": "电商卖点图",
-        "tag": "小包",
-        "src": "/portfolio-full/commerce/commerce-18.webp",
+        "title": " temp 0006",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-18.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01o7lcJ31KhooJDvLhs_!!2217560201196.png_q50.jpg_.webp"
+        "original": "__temp_0006.jpg"
       },
       {
-        "title": "电商卖点图 ",
-        "tag": "小包",
-        "src": "/portfolio-full/commerce/commerce-19.webp",
+        "title": " temp 0007",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-19.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01OowsE21Khong5YvIM_!!2217560201196.png_.webp"
+        "original": "__temp_0007.jpg"
       },
       {
-        "title": "电商卖点图",
-        "tag": "小包",
-        "src": "/portfolio-full/commerce/commerce-20.webp",
+        "title": " temp 0008",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-20.jpg",
         "media": "image",
         "size": "",
-        "original": "O1CN01RP4x8d1KhooJ2gYcX_!!2217560201196.png_q50.jpg_.webp"
+        "original": "__temp_0008.jpg"
+      },
+      {
+        "title": " temp 0009",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-21.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0009.jpg"
+      },
+      {
+        "title": " temp 0010",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-22.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0010.jpg"
+      },
+      {
+        "title": " temp 0011",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-23.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0011.jpg"
+      },
+      {
+        "title": " temp 0012",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-24.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0012.jpg"
+      },
+      {
+        "title": " temp 0013",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-25.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0013.jpg"
+      },
+      {
+        "title": " temp 0014",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-26.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0014.jpg"
+      },
+      {
+        "title": " temp 0015",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-27.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0015.jpg"
+      },
+      {
+        "title": " temp 0016",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-28.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0016.jpg"
+      },
+      {
+        "title": " temp 0017",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-29.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0017.jpg"
+      },
+      {
+        "title": " temp 0018",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-30.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0018.jpg"
+      },
+      {
+        "title": " temp 0019",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-31.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0019.webp"
+      },
+      {
+        "title": " temp 0020",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-32.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0020.webp"
+      },
+      {
+        "title": " temp 0021",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-33.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0021.webp"
+      },
+      {
+        "title": " temp 0022",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-34.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0022.webp"
+      },
+      {
+        "title": " temp 0023",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-35.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0023.webp"
+      },
+      {
+        "title": " temp 0024",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-36.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0024.jpg"
+      },
+      {
+        "title": " temp 0025",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-37.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0025.jpg"
+      },
+      {
+        "title": " temp 0026",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-38.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0026.jpg"
+      },
+      {
+        "title": " temp 0027",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-39.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0027.jpg"
+      },
+      {
+        "title": " temp 0028",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-40.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0028.jpg"
+      },
+      {
+        "title": " temp 0029",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-41.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0029.jpg"
+      },
+      {
+        "title": " temp 0030",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-42.jpg",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0030.jpg"
+      },
+      {
+        "title": " temp 0031",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-43.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0031.webp"
+      },
+      {
+        "title": " temp 0032",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-44.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0032.webp"
+      },
+      {
+        "title": " temp 0033",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-45.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0033.webp"
+      },
+      {
+        "title": " temp 0034",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-46.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0034.webp"
+      },
+      {
+        "title": " temp 0035",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-47.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0035.webp"
+      },
+      {
+        "title": " temp 0036",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-48.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0036.png"
+      },
+      {
+        "title": " temp 0037",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-49.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0037.webp"
+      },
+      {
+        "title": " temp 0038",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-50.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0038.webp"
+      },
+      {
+        "title": " temp 0039",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-51.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0039.webp"
+      },
+      {
+        "title": " temp 0040",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-52.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0040.webp"
+      },
+      {
+        "title": " temp 0041",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-53.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0041.webp"
+      },
+      {
+        "title": " temp 0042",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-54.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0042.webp"
+      },
+      {
+        "title": " temp 0043",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-55.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0043.webp"
+      },
+      {
+        "title": " temp 0044",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-56.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0044.webp"
+      },
+      {
+        "title": " temp 0045",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-57.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0045.webp"
+      },
+      {
+        "title": " temp 0046",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-58.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0046.webp"
+      },
+      {
+        "title": " temp 0047",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-59.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0047.webp"
+      },
+      {
+        "title": " temp 0048",
+        "tag": "电商产品视觉",
+        "src": "/portfolio-full/commerce/commerce-60.webp",
+        "media": "image",
+        "size": "",
+        "original": "__temp_0048.webp"
       }
     ]
   },
   {
-    "id": "site",
-    "title": "独立站视觉",
-    "tag": "Independent Site",
-    "desc": "面向独立站与产品详情页的页面视觉，包括首页、产品页、卖点图和长页面内容。",
-    "coverSrc": "/portfolio-full/site/site-cover.webp",
-    "meta": "16 Works",
-    "works": [
-      {
-        "title": "hosanwell hc ps5001wh ps5 controll...",
-        "tag": "独立站 / 白色ps5",
-        "src": "/portfolio-full/site/site-01.webp",
-        "media": "image",
-        "size": "",
-        "original": "hosanwell-hc-ps5001wh-ps5-controller-charging-station_webp.webp"
-      },
-      {
-        "title": "hosanwell hc ps5001wh ps5 disc dig...",
-        "tag": "独立站 / 白色ps5",
-        "src": "/portfolio-full/site/site-02.webp",
-        "media": "image",
-        "size": "",
-        "original": "hosanwell-hc-ps5001wh-ps5-disc-digital-wall-mount-compatible_webp.webp"
-      },
-      {
-        "title": "hosanwell hc ps5001wh ps5 wall mou...",
-        "tag": "独立站 / 白色ps5",
-        "src": "/portfolio-full/site/site-03.webp",
-        "media": "image",
-        "size": "",
-        "original": "hosanwell-hc-ps5001wh-ps5-wall-mount-bracket-secure_webp.webp"
-      },
-      {
-        "title": "hosanwell hc ps5001wh ps5 wall mou...",
-        "tag": "独立站 / 白色ps5",
-        "src": "/portfolio-full/site/site-04.webp",
-        "media": "image",
-        "size": "",
-        "original": "hosanwell-hc-ps5001wh-ps5-wall-mount-easy-installation_webp.webp"
-      },
-      {
-        "title": "hosanwell hc ps5001wh ps5 wall mou...",
-        "tag": "独立站 / 白色ps5",
-        "src": "/portfolio-full/site/site-05.webp",
-        "media": "image",
-        "size": "",
-        "original": "hosanwell-hc-ps5001wh-ps5-wall-mount-installation-guide_webp.webp"
-      },
-      {
-        "title": "hosanwell hc ps5001wh ps5 wall mou...",
-        "tag": "独立站 / 白色ps5",
-        "src": "/portfolio-full/site/site-06.webp",
-        "media": "image",
-        "size": "",
-        "original": "hosanwell-hc-ps5001wh-ps5-wall-mount-kit-white_webp.webp"
-      },
-      {
-        "title": "hosanwell hc ps5001wh wall mounted...",
-        "tag": "独立站 / 白色ps5",
-        "src": "/portfolio-full/site/site-07.webp",
-        "media": "image",
-        "size": "",
-        "original": "hosanwell-hc-ps5001wh-wall-mounted-ps5-living-room-setup_webp.webp"
-      },
-      {
-        "title": "Airflow friendly PS5 wall mount wi...",
-        "tag": "独立站 / 白色ps5 / 详情页",
-        "src": "/portfolio-full/site/site-08.webp",
-        "media": "image",
-        "size": "",
-        "original": "Airflow-friendly_PS5_wall_mount_with_open_structure_for_better_heat_dissipation_170c4c47-d534-4c6d-a589-2e36aa8e569f.webp"
-      },
-      {
-        "title": "Before and after comparison of a c...",
-        "tag": "独立站 / 白色ps5 / 详情页",
-        "src": "/portfolio-full/site/site-09.webp",
-        "media": "image",
-        "size": "",
-        "original": "Before_and_after_comparison_of_a_cluttered_gaming_desk_and_a_clean_PS5_wall_mount_setup_1.webp"
-      },
-      {
-        "title": "Compatibility chart for PS5 PS5 Sl...",
-        "tag": "独立站 / 白色ps5 / 详情页",
-        "src": "/portfolio-full/site/site-10.webp",
-        "media": "image",
-        "size": "",
-        "original": "Compatibility_chart_for_PS5_PS5_Slim_and_PS5_Pro_disc_and_digital_models_ce78d4e1-407c-4437-913d-fe8156ecf2d5.webp"
-      },
-      {
-        "title": "Hosanwell white PS5 wall mount kit...",
-        "tag": "独立站 / 白色ps5 / 详情页",
-        "src": "/portfolio-full/site/site-11.webp",
-        "media": "image",
-        "size": "",
-        "original": "Hosanwell_white_PS5_wall_mount_kit_with_charging_station_RGB_lighting_airflow_support_and_compatibility_for_PS5_Slim_and_PS5_Pro_64150a90-15e6-407f-936f-53beb1225471.webp"
-      },
-      {
-        "title": "Step by step installation guide fo...",
-        "tag": "独立站 / 白色ps5 / 详情页",
-        "src": "/portfolio-full/site/site-12.webp",
-        "media": "image",
-        "size": "",
-        "original": "Step-by-step_installation_guide_for_the_Hosanwell_PS5_wall_mount_kit_with_charging_station_c39e3033-12ba-4bd6-bf5f-479965221f93.webp"
-      },
-      {
-        "title": "White PS5 wall mount with RGB ligh...",
-        "tag": "独立站 / 白色ps5 / 详情页",
-        "src": "/portfolio-full/site/site-13.webp",
-        "media": "image",
-        "size": "",
-        "original": "White_PS5_wall_mount_with_RGB_light_modes_for_a_clean_gaming_room_setup_e7eb57fa-03f9-4e3f-92ab-0e708fd2a53d.webp"
-      },
-      {
-        "title": "白色PS5",
-        "tag": "独立站 / 独立站-产品页面",
-        "src": "/portfolio-full/site/site-14.png",
-        "media": "image",
-        "size": "long",
-        "original": "白色PS5.png"
-      },
-      {
-        "title": "黑色PS5",
-        "tag": "独立站 / 独立站-产品页面",
-        "src": "/portfolio-full/site/site-15.png",
-        "media": "image",
-        "size": "long",
-        "original": "黑色PS5.png"
-      },
-      {
-        "title": "主页效果",
-        "tag": "独立站 / 独立站-产品页面",
-        "src": "/portfolio-full/site/site-16.png",
-        "media": "image",
-        "size": "long",
-        "original": "主页效果.png"
-      }
-    ]
+      "id": "aigc",
+      "title": "AIGC",
+      "tag": "AIGC Character",
+      "desc": "AI 人物视觉、产品佩戴场景和概念画面探索，强调商业质感与视觉叙事。",
+      "cover": "/portfolio-full/aigc/aigc-01.png",
+      "meta": "29 Works",
+      "works": [
+          {
+              "title": "AIGC (1)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-01.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (1).png"
+          },
+          {
+              "title": "AIGC (2)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-02.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (2).png"
+          },
+          {
+              "title": "AIGC (3)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-03.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (3).png"
+          },
+          {
+              "title": "AIGC (4)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-04.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (4).png"
+          },
+          {
+              "title": "AIGC (5)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-05.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (5).png"
+          },
+          {
+              "title": "AIGC (6)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-06.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (6).png"
+          },
+          {
+              "title": "AIGC (7)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-07.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (7).png"
+          },
+          {
+              "title": "AIGC (8)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-08.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (8).png"
+          },
+          {
+              "title": "AIGC (9)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-09.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (9).png"
+          },
+          {
+              "title": "AIGC (10)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-10.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (10).png"
+          },
+          {
+              "title": "AIGC (11)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-11.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (11).png"
+          },
+          {
+              "title": "AIGC (12)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-12.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (12).png"
+          },
+          {
+              "title": "AIGC (13)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-13.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (13).png"
+          },
+          {
+              "title": "AIGC (14)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-14.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (14).png"
+          },
+          {
+              "title": "AIGC (15)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-15.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (15).png"
+          },
+          {
+              "title": "AIGC (16)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-16.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (16).png"
+          },
+          {
+              "title": "AIGC (17)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-17.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (17).png"
+          },
+          {
+              "title": "AIGC (18)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-18.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (18).png"
+          },
+          {
+              "title": "AIGC (19)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-19.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (19).png"
+          },
+          {
+              "title": "AIGC (20)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-20.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (20).png"
+          },
+          {
+              "title": "AIGC (21)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-21.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (21).png"
+          },
+          {
+              "title": "AIGC (22)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-22.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (22).png"
+          },
+          {
+              "title": "AIGC (23)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-23.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (23).png"
+          },
+          {
+              "title": "AIGC (24)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-24.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (24).png"
+          },
+          {
+              "title": "AIGC (25)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-25.webp",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (25).png"
+          },
+          {
+              "title": "AIGC (26)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-26.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (26).png"
+          },
+          {
+              "title": "AIGC (27)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-27.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (27).png"
+          },
+          {
+              "title": "AIGC (28)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-28.png",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (28).png"
+          },
+          {
+              "title": "AIGC (29)",
+              "tag": "AIGC-人物",
+              "src": "/portfolio-full/aigc/aigc-29.jpg",
+              "media": "image",
+              "size": "",
+              "original": "AIGC (29).jpg"
+          }
+      ]
   },
-  {
-    "id": "aigc",
-    "title": "AIGC 人物概念",
-    "tag": "AIGC Character",
-    "desc": "AI 人物视觉、产品佩戴场景和概念画面探索，强调商业质感与视觉叙事。",
-    "coverSrc": "/portfolio-full/aigc/aigc-04.png",
-    "meta": "6 Works",
-    "works": [
-      {
-        "title": "PS5挂架游戏画面版",
-        "tag": "AIGC-人物",
-        "src": "/portfolio-full/aigc/aigc-01.png",
-        "media": "image",
-        "size": "tall",
-        "original": "PS5挂架游戏画面版.png"
-      },
-      {
-        "title": "高清",
-        "tag": "AIGC-人物",
-        "src": "/portfolio-full/aigc/aigc-02.png",
-        "media": "image",
-        "size": "long",
-        "original": "高清.png"
-      },
-      {
-        "title": "手部展示 0",
-        "tag": "AIGC-人物",
-        "src": "/portfolio-full/aigc/aigc-03.png",
-        "media": "image",
-        "size": "tall",
-        "original": "手部展示-0.png"
-      },
-      {
-        "title": "手部展示 1",
-        "tag": "AIGC-人物",
-        "src": "/portfolio-full/aigc/aigc-04.png",
-        "media": "image",
-        "size": "tall",
-        "original": "手部展示-1.png"
-      },
-      {
-        "title": "效果图",
-        "tag": "AIGC-人物",
-        "src": "/portfolio-full/aigc/aigc-05.jpg",
-        "media": "image",
-        "size": "long",
-        "original": "效果图.jpg"
-      },
-      {
-        "title": "修过的",
-        "tag": "AIGC-人物",
-        "src": "/portfolio-full/aigc/aigc-06.png",
-        "media": "image",
-        "size": "tall",
-        "original": "修过的.png"
-      }
-    ]
-  },
-  {
-    "id": "posters",
-    "title": "海报视觉",
-    "tag": "Poster Design",
-    "desc": "AI 辅助生成的竖版海报和概念视觉，适配社媒传播与活动视觉场景。",
-    "coverSrc": "/portfolio-full/posters/posters-03.png",
-    "meta": "14 Works",
-    "works": [
-      {
-        "title": "AI视觉 2026年6月16日 12 20 59",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-01.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_20_59.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 21 51",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-02.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_21_51.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 21 56",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-03.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_21_56.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 22 00",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-04.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_22_00.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 22 11",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-05.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_22_11.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 29 16",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-06.png",
-        "media": "image",
-        "size": "",
-        "original": "ChatGPT Image 2026年6月16日 12_29_16.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 29 21",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-07.png",
-        "media": "image",
-        "size": "",
-        "original": "ChatGPT Image 2026年6月16日 12_29_21.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 30 21",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-08.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_30_21.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 30 25",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-09.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_30_25.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 30 28",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-10.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_30_28.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 34 18",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-11.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_34_18.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 34 54",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-12.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_34_54.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 35 10",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-13.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_35_10.png"
-      },
-      {
-        "title": "AI视觉 2026年6月16日 12 35 14",
-        "tag": "海报",
-        "src": "/portfolio-full/posters/posters-14.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_35_14.png"
-      }
-    ]
-  },
-  {
-    "id": "covers",
-    "title": "视频封面与社媒图",
-    "tag": "Cover / Social Visual",
-    "desc": "视频封面、短视频首帧和社媒视觉图，突出点击识别度和产品记忆点。",
-    "meta": "9 Works",
-    "works": [
-      {
-        "title": "AI视觉 2026年6月16日 12 19 30",
-        "tag": "视频封面",
-        "src": "/portfolio-full/covers/covers-01.png",
-        "media": "image",
-        "size": "tall",
-        "original": "ChatGPT Image 2026年6月16日 12_19_30.png"
-      },
-      {
-        "title": "PS5极简高级封面",
-        "tag": "视频封面",
-        "src": "/portfolio-full/covers/covers-02.png",
-        "media": "image",
-        "size": "tall",
-        "original": "PS5极简高级封面.png"
-      },
-      {
-        "title": "SW2充电底座 三款合集 极简场景",
-        "tag": "视频封面",
-        "src": "/portfolio-full/covers/covers-03.png",
-        "media": "image",
-        "size": "tall",
-        "original": "SW2充电底座_三款合集_极简场景.png"
-      },
-      {
-        "title": "SW2握把极简高级封面",
-        "tag": "视频封面",
-        "src": "/portfolio-full/covers/covers-04.png",
-        "media": "image",
-        "size": "tall",
-        "original": "SW2握把极简高级封面.png"
-      },
-      {
-        "title": "Switch2红白机握把产品图 (1)",
-        "tag": "视频封面",
-        "src": "/portfolio-full/covers/covers-05.png",
-        "media": "image",
-        "size": "tall",
-        "original": "Switch2红白机握把产品图 (1).png"
-      },
-      {
-        "title": "Switch2红白机握把产品图 (2)",
-        "tag": "视频封面",
-        "src": "/portfolio-full/covers/covers-06.png",
-        "media": "image",
-        "size": "tall",
-        "original": "Switch2红白机握把产品图 (2).png"
-      },
-      {
-        "title": "Switch2红白机握把产品图",
-        "tag": "视频封面",
-        "src": "/portfolio-full/covers/covers-07.png",
-        "media": "image",
-        "size": "tall",
-        "original": "Switch2红白机握把产品图.png"
-      },
-      {
-        "title": "Switch2红白机握把产品图1",
-        "tag": "视频封面",
-        "src": "/portfolio-full/covers/covers-08.png",
-        "media": "image",
-        "size": "tall",
-        "original": "Switch2红白机握把产品图1.png"
-      },
-      {
-        "title": "极简高级视频封面图",
-        "tag": "视频封面",
-        "src": "/portfolio-full/covers/covers-09.png",
-        "media": "image",
-        "size": "tall",
-        "original": "极简高级视频封面图.png"
-      }
-    ]
-  },
-  {
-    "id": "longform",
-    "title": "长图详情页",
-    "tag": "Long-form Detail Page",
-    "desc": "长图详情页与动态详情页内容，适合纵向浏览产品卖点、功能和使用场景。",
-    "meta": "2 Works",
-    "works": [
-      {
-        "title": "最新的详情页 修改 01",
-        "tag": "小米音箱 / 详情页",
-        "src": "/portfolio-full/longform/longform-01.gif",
-        "media": "gif",
-        "size": "long",
-        "original": "最新的详情页---修改_01.gif"
-      },
-      {
-        "title": "最新的详情页 修改 02",
-        "tag": "小米音箱 / 详情页",
-        "src": "/portfolio-full/longform/longform-02.gif",
-        "media": "gif",
-        "size": "long",
-        "original": "最新的详情页---修改_02.gif"
-      }
-    ]
-  }
+    {
+        "id": "longform",
+        "title": "电商详情页",
+        "tag": "Long-form Detail Page",
+        "desc": "长图详情页与动态详情页内容，适合纵向浏览产品卖点、功能和使用场景。",
+        "cover": "/portfolio-full/longform/longform-01.png",
+        "meta": "8 Works",
+        "works": [
+            {
+                "title": "1",
+                "tag": "详情页",
+                "src": "/portfolio-full/longform/longform-01.png",
+                "media": "image",
+                "size": "long",
+                "original": "1.png"
+            },
+            {
+                "title": "2",
+                "tag": "详情页",
+                "src": "/portfolio-full/longform/longform-02.webp",
+                "media": "image",
+                "size": "long",
+                "original": "2.png"
+            },
+            {
+                "title": "3",
+                "tag": "详情页",
+                "src": "/portfolio-full/longform/longform-03.jpg",
+                "media": "image",
+                "size": "long",
+                "original": "3.jpg"
+            },
+            {
+                "title": "4",
+                "tag": "详情页",
+                "src": "/portfolio-full/longform/longform-04.jpg",
+                "media": "image",
+                "size": "long",
+                "original": "4.jpg"
+            },
+            {
+                "title": "5",
+                "tag": "详情页",
+                "src": "/portfolio-full/longform/longform-05.jpg",
+                "media": "image",
+                "size": "long",
+                "original": "5.jpg"
+            },
+            {
+                "title": "6",
+                "tag": "详情页",
+                "src": "/portfolio-full/longform/longform-06.png",
+                "media": "image",
+                "size": "long",
+                "original": "6.png"
+            },
+            {
+                "title": "7",
+                "tag": "详情页",
+                "src": "/portfolio-full/longform/longform-07.png",
+                "media": "image",
+                "size": "long",
+                "original": "7.png"
+            },
+            {
+                "title": "8",
+                "tag": "详情页",
+                "src": "/portfolio-full/longform/longform-08.png",
+                "media": "image",
+                "size": "long",
+                "original": "8.png"
+            }
+        ]
+    }
 ];
 
 function getModuleCoverItem(module) {
@@ -828,28 +1181,23 @@ function getModuleCoverItem(module) {
   return module.works.find((item) => item.media !== "video") || module.works[0] || { src: "", media: "image", title: module.title };
 }
 
-function getModuleCover(module) {
-  return getModuleCoverItem(module).src;
-}
-
-function getGroupedWorks(module) {
-  return module.works.reduce((groups, item) => {
-    const key = item.tag || module.title;
-    const group = groups.find((entry) => entry.title === key);
-    if (group) {
-      group.items.push(item);
-    } else {
-      groups.push({ title: key, items: [item] });
-    }
-    return groups;
-  }, []);
-}
-
 function getMediaClass(item) {
   return [item.size, item.media === "video" ? "video-card" : "", item.media === "gif" ? "gif-card" : ""]
     .filter(Boolean)
     .join(" ");
 }
+
+const longformImageMeta = {
+  "/portfolio-full/longform/longform-01.png": { width: 1063, height: 5236 },
+  "/portfolio-full/longform/longform-02.webp": { width: 1080, height: 11635 },
+  "/portfolio-full/longform/longform-03.jpg": { width: 1464, height: 4799 },
+  "/portfolio-full/longform/longform-04.jpg": { width: 1464, height: 4204 },
+  "/portfolio-full/longform/longform-05.jpg": { width: 1464, height: 5399 },
+  "/portfolio-full/longform/longform-06.png": { width: 1704, height: 7056 },
+  "/portfolio-full/longform/longform-07.png": { width: 1704, height: 6541 },
+  "/portfolio-full/longform/longform-08.png": { width: 1894, height: 6329 },
+};
+
 const strengths = [
   {
     icon: BrainCircuit,
@@ -926,6 +1274,259 @@ function getRouteState() {
   return { moduleId, commerceProjectId, edit, page };
 }
 
+function shouldShowTuningControls() {
+  return new URLSearchParams(window.location.search).get("controls") === "1";
+}
+
+function refreshScrollTriggersAfterStableLayout() {
+  const refreshAfterLoad = () => {
+    requestAnimationFrame(async () => {
+      const fontReady = document.fonts?.ready.catch(() => undefined) || Promise.resolve();
+      const imageReady = Promise.all(
+        Array.from(document.images).map((image) => {
+          if (image.complete) return Promise.resolve();
+          return new Promise<void>((resolve) => {
+            image.addEventListener("load", () => resolve(), { once: true });
+            image.addEventListener("error", () => resolve(), { once: true });
+          });
+        }),
+      );
+
+      await Promise.race([
+        Promise.all([fontReady, imageReady]),
+        new Promise((resolve) => window.setTimeout(resolve, 1200)),
+      ]);
+
+      forceTopScrollState();
+      ScrollTrigger.refresh(true);
+      forceTopScrollState();
+    });
+  };
+
+  if (document.readyState === "complete") {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(refreshAfterLoad);
+    });
+    return;
+  }
+
+  window.addEventListener(
+    "load",
+    () => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(refreshAfterLoad);
+      });
+    },
+    { once: true },
+  );
+}
+
+type SectionScrubReveal = "about" | "strengths" | "contact";
+
+function useLoadNearViewport(
+  targetRef: React.RefObject<Element | null>,
+  rootMargin = "700px 0px",
+) {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [hasUserScrolled, setHasUserScrolled] = useState(false);
+
+  useEffect(() => {
+    if (hasUserScrolled || shouldLoad) return undefined;
+
+    const handleFirstScroll = () => setHasUserScrolled(true);
+    window.addEventListener("scroll", handleFirstScroll, { once: true, passive: true });
+    window.addEventListener("wheel", handleFirstScroll, { once: true, passive: true });
+    window.addEventListener("touchmove", handleFirstScroll, { once: true, passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleFirstScroll);
+      window.removeEventListener("wheel", handleFirstScroll);
+      window.removeEventListener("touchmove", handleFirstScroll);
+    };
+  }, [hasUserScrolled, shouldLoad]);
+
+  useEffect(() => {
+    if (shouldLoad || !hasUserScrolled) return undefined;
+    const target = targetRef.current;
+    if (!target) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin, threshold: 0 },
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [hasUserScrolled, rootMargin, shouldLoad, targetRef]);
+
+  return shouldLoad;
+}
+
+function useGsapSectionScrubReveal(
+  sectionRef: React.RefObject<HTMLElement | null>,
+  section: SectionScrubReveal,
+) {
+  useEffect(() => {
+    const sectionElement = sectionRef.current;
+    if (!sectionElement) return;
+
+    const context = gsap.context(() => {
+      if (section === "about") {
+        const aboutContent = sectionElement.querySelector("[data-about-content]");
+        const title = sectionElement.querySelector("[data-about-title]");
+        const description = sectionElement.querySelector("[data-about-description]");
+        const experienceCards = gsap.utils.toArray<HTMLElement>(
+          sectionElement.querySelectorAll("[data-about-experience]"),
+        );
+        const contact = sectionElement.querySelector("[data-about-contact]");
+        const stats = gsap.utils.toArray<HTMLElement>(
+          sectionElement.querySelectorAll("[data-about-stat]"),
+        );
+
+        if (!aboutContent || !title || !description || !contact || experienceCards.length === 0 || stats.length === 0) {
+          console.warn("About reveal skipped: missing required DOM nodes.");
+          return;
+        }
+
+        gsap.set(title, {
+          opacity: 0,
+          y: 80,
+          filter: "blur(8px)",
+        });
+
+        gsap.set(description, {
+          opacity: 0,
+          y: 50,
+          filter: "blur(5px)",
+        });
+
+        gsap.set(experienceCards, {
+          opacity: 0,
+          y: 60,
+        });
+
+        gsap.set(contact, {
+          opacity: 0,
+          y: 35,
+        });
+
+        gsap.set(stats, {
+          opacity: 0,
+          y: 40,
+        });
+
+        ScrollTrigger.getById("about-reveal")?.kill();
+
+        const timeline = gsap.timeline({
+          defaults: {
+            ease: "none",
+          },
+          scrollTrigger: {
+            id: "about-reveal",
+            trigger: aboutContent,
+            start: "top 62%",
+            end: "+=260",
+            scrub: 0.2,
+            markers: false,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        timeline
+          .to(title, {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.25,
+          })
+          .to(description, {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.18,
+          }, 0.08)
+          .to(experienceCards, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.05,
+            duration: 0.22,
+          }, 0.14)
+          .to(contact, {
+            opacity: 1,
+            y: 0,
+            duration: 0.16,
+          }, 0.23)
+          .to(stats, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.04,
+            duration: 0.18,
+          }, 0.28);
+
+        refreshScrollTriggersAfterStableLayout();
+        return;
+      }
+
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionElement,
+          start: "top 82%",
+          end: section === "contact" ? "+=280" : "+=300",
+          scrub: 0.25,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      if (section === "strengths") {
+        timeline
+          .fromTo(
+            ".section-head",
+            { opacity: 0, y: 60, filter: "blur(6px)" },
+            { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.24, ease: "none" },
+          )
+          .fromTo(
+            ".strength-card",
+            { opacity: 0, y: 50, filter: "blur(4px)" },
+            { opacity: 1, y: 0, filter: "blur(0px)", stagger: 0.06, duration: 0.26, ease: "none" },
+            0.12,
+          );
+      }
+
+      if (section === "contact") {
+        timeline
+          .fromTo(
+            ".end-heading-motion",
+            { opacity: 0, y: 60, filter: "blur(6px)" },
+            { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.24, ease: "none" },
+          )
+          .fromTo(
+            ".end-panel",
+            { opacity: 0, y: 40 },
+            { opacity: 1, y: 0, duration: 0.2, ease: "none" },
+            0.12,
+          )
+          .fromTo(
+            ".end-mark",
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.16, ease: "none" },
+            0.24,
+          );
+      }
+
+      ScrollTrigger.refresh();
+    }, sectionElement);
+
+    return () => {
+      context.revert();
+    };
+  }, [sectionRef, section]);
+}
+
 function App() {
   const [routeState, setRouteState] = useState(() => getRouteState());
   const [lastWorkModuleId, setLastWorkModuleId] = useState(() => {
@@ -938,6 +1539,10 @@ function App() {
   const activeCommerceProject = routeState.commerceProjectId
     ? commerceProjects.find((project) => project.id === routeState.commerceProjectId)
     : null;
+
+  useEffect(() => {
+    forceTopScrollState();
+  }, []);
 
   const openModulePage = (id) => {
     setLastWorkModuleId(id);
@@ -1033,19 +1638,102 @@ function App() {
 }
 
 const defaultVideoSettings = {
-  x: 36,
-  y: 48,
-  scale: 1.18,
-  opacity: 0.82,
-  brightness: 0.84,
+  x: 93,
+  y: 69,
+  scale: 1.29,
+  opacity: 1,
+  brightness: 1,
   contrast: 1.08,
   saturation: 1.08,
 };
+
+const defaultHeroTextSettings = {
+  titleX: -197,
+  titleY: 226,
+  titleSize: 186,
+  titleWidth: 110,
+  titleSkew: -6,
+  titleLineHeight: 0.82,
+  titleLetterSpacing: 0.01,
+  accentLetterSpacing: 0.015,
+  titleGap: 0,
+  copyX: 0,
+  copyY: 0,
+  copySize: 18,
+  kickerX: 0,
+  kickerY: 0,
+  kickerSize: 16,
+  hudX: 1,
+  hudY: 0,
+  hudOpacity: 0,
+  trailOpacity: 68,
+  trailWidth: 58,
+};
+
+const heroSettingsVersion = "hero-fixed-2026-07-06-01";
 
 const defaultModuleImageSettings = {
   x: 50,
   y: 50,
   scale: 1,
+};
+
+const defaultAboutContentSettings = {
+  x: -75,
+  y: 0,
+  width: 1000,
+  headingX: 0,
+  headingY: 0,
+  headingWidth: 1000,
+  headingGap: 18,
+  kickerSize: 12,
+  kickerLetterSpacing: 0.06,
+  titleSize: 82,
+  titleLineHeight: 0.95,
+  titleLetterSpacing: -0.04,
+  descriptionSize: 15,
+  descriptionTop: 24,
+  descriptionLineHeight: 1.58,
+  descriptionLetterSpacing: 0,
+  experienceX: 0,
+  experienceY: 0,
+  experienceWidth: 1000,
+  experienceTop: 52,
+  experienceGap: 10,
+  cardHeight: 150,
+  cardPaddingX: 24,
+  cardPaddingY: 20,
+  cardTimeSize: 12,
+  cardTimeGap: 6,
+  cardTitleSize: 32,
+  cardTitleLineHeight: 1.12,
+  cardTextSize: 12,
+  cardTextTop: 6,
+  cardTextLineHeight: 1.28,
+  cardLetterSpacing: 0,
+  contactX: 0,
+  contactY: 0,
+  contactWidth: 1000,
+  contactTop: 24,
+  contactGap: 10,
+  contactPaddingX: 14,
+  contactPaddingY: 10,
+  contactFontSize: 14,
+  contactIconGap: 9,
+  statsX: 0,
+  statsY: 0,
+  statsWidth: 1000,
+  statsTop: 24,
+  statsGap: 10,
+  statHeight: 72,
+  statPaddingX: 12,
+  statPaddingY: 10,
+  statValueSize: 20,
+  statValueLineHeight: 1.12,
+  statValueBottom: 8,
+  statLabelSize: 12,
+  statLabelLineHeight: 1.22,
+  statLetterSpacing: 0,
 };
 
 function SiteNav() {
@@ -1141,21 +1829,64 @@ function SiteNav() {
 function Hero() {
   const [videoSettings, setVideoSettings] = useState(() => {
     try {
+      const storedVideoSettings = JSON.parse(localStorage.getItem("heroVideoSettings") || "{}");
+      const shouldMigrateHeroSettings = localStorage.getItem("heroSettingsVersion") !== heroSettingsVersion;
+      if (shouldMigrateHeroSettings) {
+        if (storedVideoSettings.x === 36) storedVideoSettings.x = defaultVideoSettings.x;
+        if (storedVideoSettings.y === 48) storedVideoSettings.y = defaultVideoSettings.y;
+        if (storedVideoSettings.scale === 1.18) storedVideoSettings.scale = defaultVideoSettings.scale;
+      }
       return {
         ...defaultVideoSettings,
-        ...JSON.parse(localStorage.getItem("heroVideoSettings") || "{}"),
+        ...storedVideoSettings,
       };
     } catch {
       return defaultVideoSettings;
     }
   });
+  const [heroTextSettings, setHeroTextSettings] = useState(() => {
+    try {
+      const storedHeroTextSettings = JSON.parse(localStorage.getItem("heroTextSettingsV2") || "{}");
+      const shouldMigrateHeroSettings = localStorage.getItem("heroSettingsVersion") !== heroSettingsVersion;
+      if (shouldMigrateHeroSettings) {
+        if (storedHeroTextSettings.titleSize === 132) storedHeroTextSettings.titleSize = defaultHeroTextSettings.titleSize;
+        if (storedHeroTextSettings.titleSize === 170) storedHeroTextSettings.titleSize = defaultHeroTextSettings.titleSize;
+        if (storedHeroTextSettings.titleX === 0) storedHeroTextSettings.titleX = defaultHeroTextSettings.titleX;
+        if (storedHeroTextSettings.titleY === 0) storedHeroTextSettings.titleY = defaultHeroTextSettings.titleY;
+        if (storedHeroTextSettings.titleWidth === 98) storedHeroTextSettings.titleWidth = defaultHeroTextSettings.titleWidth;
+        if (storedHeroTextSettings.titleLetterSpacing < -0.04) storedHeroTextSettings.titleLetterSpacing = defaultHeroTextSettings.titleLetterSpacing;
+        if (storedHeroTextSettings.accentLetterSpacing < -0.04) storedHeroTextSettings.accentLetterSpacing = defaultHeroTextSettings.accentLetterSpacing;
+        if (storedHeroTextSettings.hudOpacity === 75) storedHeroTextSettings.hudOpacity = defaultHeroTextSettings.hudOpacity;
+      }
+      return {
+        ...defaultHeroTextSettings,
+        ...storedHeroTextSettings,
+      };
+    } catch {
+      return defaultHeroTextSettings;
+    }
+  });
 
   useEffect(() => {
     localStorage.setItem("heroVideoSettings", JSON.stringify(videoSettings));
+    localStorage.setItem("heroSettingsVersion", heroSettingsVersion);
   }, [videoSettings]);
+
+  useEffect(() => {
+    localStorage.setItem("heroTextSettingsV2", JSON.stringify(heroTextSettings));
+  }, [heroTextSettings]);
 
   const updateVideoSetting = (key, value) => {
     setVideoSettings((current) => ({ ...current, [key]: Number(value) }));
+  };
+
+  const updateHeroTextSetting = (key, value) => {
+    setHeroTextSettings((current) => ({ ...current, [key]: Number(value) }));
+  };
+
+  const resetHeroSettings = () => {
+    setVideoSettings(defaultVideoSettings);
+    setHeroTextSettings(defaultHeroTextSettings);
   };
 
   const videoStyle = {
@@ -1166,6 +1897,29 @@ function Hero() {
     transformOrigin: `${videoSettings.x}% ${videoSettings.y}%`,
   };
 
+  const heroTextStyle: React.CSSProperties & Record<string, string> = {
+    "--hero-title-x": `${heroTextSettings.titleX}px`,
+    "--hero-title-y": `${heroTextSettings.titleY}px`,
+    "--hero-title-size": `${heroTextSettings.titleSize}px`,
+    "--hero-title-width": `${heroTextSettings.titleWidth / 100}`,
+    "--hero-title-skew": `${heroTextSettings.titleSkew}deg`,
+    "--hero-title-line-height": `${heroTextSettings.titleLineHeight}`,
+    "--hero-title-letter-spacing": `${heroTextSettings.titleLetterSpacing}em`,
+    "--hero-accent-letter-spacing": `${heroTextSettings.accentLetterSpacing}em`,
+    "--hero-title-gap": `${heroTextSettings.titleGap}px`,
+    "--hero-copy-x": `${heroTextSettings.copyX}px`,
+    "--hero-copy-y": `${heroTextSettings.copyY}px`,
+    "--hero-copy-size": `${heroTextSettings.copySize}px`,
+    "--hero-kicker-x": `${heroTextSettings.kickerX}px`,
+    "--hero-kicker-y": `${heroTextSettings.kickerY}px`,
+    "--hero-kicker-size": `${heroTextSettings.kickerSize}px`,
+    "--hero-hud-x": `${heroTextSettings.hudX}px`,
+    "--hero-hud-y": `${heroTextSettings.hudY}px`,
+    "--hero-hud-opacity": `${heroTextSettings.hudOpacity / 100}`,
+    "--hero-trail-opacity": `${heroTextSettings.trailOpacity / 100}`,
+    "--hero-trail-width": `${heroTextSettings.trailWidth}%`,
+  };
+
   return (
     <section className="hero" id="home">
       <div className="hero-video-frame" aria-hidden="true">
@@ -1173,126 +1927,325 @@ function Hero() {
           <source src="/hero-background.mp4" type="video/mp4" />
         </video>
       </div>
-      <div className="hero-figure" aria-hidden="true">
-        <img src="/hero-render-figure.svg" alt="" />
-      </div>
-
-      <div className="hero-index-word" aria-hidden="true">RENDER</div>
-      <div className="container hero-content hero-index-layout">
-        <p className="hero-microcopy">
-          I build clear visual systems for products, commerce, and motion content.
-        </p>
-
-        <div className="hero-statement">
-          <span>LH</span>
-          <h1>
-            Visual design is not decoration.
-            <br />
-            It is product direction.
+      <div className="container hero-content hero-index-layout" style={heroTextStyle}>
+        <div className="hero-statement hero-copy" aria-labelledby="hero-title">
+          <div className="hero-kicker">
+            <span>VISUAL SYSTEMS</span>
+          </div>
+          <h1 id="hero-title" className="hero-title">
+            <span className="hero-title-line">
+              VISUAL SYSTEMS
+            </span>
+            <span className="hero-title-line hero-title-accent" data-text="MOTION">
+              MOTION
+            </span>
           </h1>
+          <div className="hero-hud" aria-hidden="true">
+            <span className="hero-hud-cross hero-hud-cross-a" />
+            <span className="hero-hud-cross hero-hud-cross-b" />
+            <span className="hero-hud-ring" />
+            <span className="hero-hud-line hero-hud-line-a" />
+            <span className="hero-hud-line hero-hud-line-b" />
+          </div>
+          <p className="hero-microcopy">
+            Visual systems for product, commerce, and motion. Selected works in rendering, AI visuals, ecommerce pages, and motion content.
+          </p>
         </div>
       </div>
-      <VideoTuningPanel settings={videoSettings} onChange={updateVideoSetting} />
+      {shouldShowTuningControls() && (
+        <HeroTuningPanel
+          videoSettings={videoSettings}
+          textSettings={heroTextSettings}
+          onVideoChange={updateVideoSetting}
+          onTextChange={updateHeroTextSetting}
+          onReset={resetHeroSettings}
+        />
+      )}
     </section>
   );
 }
-function VideoTuningPanel({ settings, onChange }) {
+function HeroTuningPanel({ videoSettings, textSettings, onVideoChange, onTextChange, onReset }) {
   const [collapsed, setCollapsed] = useState(true);
-  const controls = [
-    { key: "x", label: "水平位置", min: 0, max: 100, step: 1, suffix: "%" },
-    { key: "y", label: "垂直位置", min: 0, max: 100, step: 1, suffix: "%" },
-    { key: "scale", label: "缩放", min: 1, max: 2.4, step: 0.01, suffix: "x" },
-    { key: "opacity", label: "透明度", min: 0.2, max: 1, step: 0.01, suffix: "" },
-    { key: "brightness", label: "亮度", min: 0.45, max: 1.3, step: 0.01, suffix: "" },
-    { key: "contrast", label: "对比度", min: 0.7, max: 1.6, step: 0.01, suffix: "" },
-    { key: "saturation", label: "饱和度", min: 0, max: 1.8, step: 0.01, suffix: "" },
+  const panelTitle = "首页控制台";
+  const textGroupTitle = "标题与文案";
+  const videoGroupTitle = "背景视频";
+  const textControlLabels = {
+    titleSize: "标题字号",
+    titleX: "标题 X",
+    titleY: "标题 Y",
+    titleWidth: "标题宽度",
+    titleSkew: "标题倾斜",
+    titleLineHeight: "标题行高",
+    titleLetterSpacing: "白字字距",
+    accentLetterSpacing: "绿字字距",
+    titleGap: "两行间距",
+    copySize: "说明字号",
+    copyX: "说明 X",
+    copyY: "说明 Y",
+    kickerSize: "标签字号",
+    kickerX: "标签 X",
+    kickerY: "标签 Y",
+    trailOpacity: "拖影强度",
+    trailWidth: "拖影宽度",
+    hudOpacity: "HUD 透明",
+    hudX: "HUD X",
+    hudY: "HUD Y",
+  };
+  const videoControlLabels = {
+    x: "视频 X",
+    y: "视频 Y",
+    scale: "视频缩放",
+    opacity: "视频透明",
+    brightness: "视频亮度",
+    contrast: "视频对比",
+    saturation: "视频饱和",
+  };
+  const videoControls = [
+    { key: "x", label: "ˮƽλ", min: 0, max: 100, step: 1, suffix: "%" },
+    { key: "y", label: "ֱλ", min: 0, max: 100, step: 1, suffix: "%" },
+    { key: "scale", label: "", min: 1, max: 2.4, step: 0.01, suffix: "x" },
+    { key: "opacity", label: "͸", min: 0.2, max: 1, step: 0.01, suffix: "" },
+    { key: "brightness", label: "", min: 0.45, max: 1.3, step: 0.01, suffix: "" },
+    { key: "contrast", label: "Աȶ", min: 0.7, max: 1.6, step: 0.01, suffix: "" },
+    { key: "saturation", label: "Ͷ", min: 0, max: 1.8, step: 0.01, suffix: "" },
+  ];
+  const textControls = [
+    { key: "titleSize", label: "С", min: 38, max: 220, step: 1, suffix: "px" },
+    { key: "titleX", label: " X", min: -900, max: 900, step: 1, suffix: "px" },
+    { key: "titleY", label: " Y", min: -520, max: 520, step: 1, suffix: "px" },
+    { key: "titleWidth", label: "", min: 72, max: 135, step: 1, suffix: "%" },
+    { key: "titleSkew", label: "б", min: -14, max: 0, step: 1, suffix: "deg" },
+    { key: "titleLineHeight", label: "и", min: 0.62, max: 1.08, step: 0.01, suffix: "" },
+    { key: "titleLetterSpacing", label: "ɫҼ", min: -0.04, max: 0.08, step: 0.005, suffix: "em" },
+    { key: "accentLetterSpacing", label: "ɫҼ", min: -0.04, max: 0.08, step: 0.005, suffix: "em" },
+    { key: "titleGap", label: "м", min: -24, max: 30, step: 1, suffix: "px" },
+    { key: "copySize", label: "ִС", min: 10, max: 24, step: 1, suffix: "px" },
+    { key: "copyX", label: " X", min: -900, max: 900, step: 1, suffix: "px" },
+    { key: "copyY", label: " Y", min: -520, max: 520, step: 1, suffix: "px" },
+    { key: "kickerSize", label: "ǩС", min: 10, max: 22, step: 1, suffix: "px" },
+    { key: "kickerX", label: "ǩ X", min: -420, max: 420, step: 1, suffix: "px" },
+    { key: "kickerY", label: "ǩ Y", min: -220, max: 220, step: 1, suffix: "px" },
+    { key: "trailOpacity", label: "ɫӰǿ", min: 0, max: 100, step: 1, suffix: "%" },
+    { key: "trailWidth", label: "ɫӰ", min: 0, max: 100, step: 1, suffix: "%" },
+    { key: "hudOpacity", label: "HUD ͸", min: 0, max: 100, step: 1, suffix: "%" },
+    { key: "hudX", label: "HUD X", min: -420, max: 420, step: 1, suffix: "px" },
+    { key: "hudY", label: "HUD Y", min: -260, max: 260, step: 1, suffix: "px" },
   ];
 
-  const cssText = `object-position: ${settings.x}% ${settings.y}%; transform: scale(${settings.scale}); opacity: ${settings.opacity}; filter: saturate(${settings.saturation}) contrast(${settings.contrast}) brightness(${settings.brightness});`;
+  const fixedParamsText = JSON.stringify({
+    videoSettings,
+    heroTextSettings: textSettings,
+  }, null, 2);
+
+  const cssText = `title: translate(${textSettings.titleX}px, ${textSettings.titleY}px), ${textSettings.titleSize}px; copy: translate(${textSettings.copyX}px, ${textSettings.copyY}px), ${textSettings.copySize}px; video: ${videoSettings.x}% ${videoSettings.y}%, scale(${videoSettings.scale});`;
 
   if (collapsed) {
     return (
-      <button className="video-tuning-toggle" type="button" onClick={() => setCollapsed(false)}>
-        视频控制台
+      <button className="video-tuning-toggle hero-tuning-toggle" type="button" onClick={() => setCollapsed(false)}>
+        ҳ̨
       </button>
     );
   }
 
   return (
-    <aside className="video-tuning-panel" aria-label="背景视频调整控制台">
+    <aside className="video-tuning-panel hero-tuning-panel" aria-label="ҳ Hero ̨">
       <div className="video-tuning-header">
-        <div className="video-tuning-title">背景视频控制台</div>
-        <button className="video-collapse" type="button" onClick={() => setCollapsed(true)}>收起</button>
+        <div className="video-tuning-title">ҳ̨</div>
+        <button className="video-collapse" type="button" onClick={() => setCollapsed(true)}></button>
       </div>
-      {controls.map((control) => (
+      <div className="hero-control-group">
+        <span></span>
+        {textControls.map((control) => (
+          <label className="video-control" key={control.key}>
+            <span>
+              {textControlLabels[control.key] || control.label}
+              <strong>{textSettings[control.key]}{control.suffix}</strong>
+            </span>
+            <input
+              type="range"
+              min={control.min}
+              max={control.max}
+              step={control.step}
+              value={textSettings[control.key]}
+              onChange={(event) => onTextChange(control.key, event.target.value)}
+            />
+          </label>
+        ))}
+      </div>
+      <div className="hero-control-group">
+        <span>Ƶ</span>
+        {videoControls.map((control) => (
         <label className="video-control" key={control.key}>
           <span>
-            {control.label}
-            <strong>{settings[control.key]}{control.suffix}</strong>
+            {videoControlLabels[control.key] || control.label}
+            <strong>{videoSettings[control.key]}{control.suffix}</strong>
           </span>
           <input
             type="range"
             min={control.min}
             max={control.max}
             step={control.step}
-            value={settings[control.key]}
-            onChange={(event) => onChange(control.key, event.target.value)}
+            value={videoSettings[control.key]}
+            onChange={(event) => onVideoChange(control.key, event.target.value)}
           />
         </label>
       ))}
+      </div>
       <button
         className="video-reset"
         type="button"
-        onClick={() => controls.forEach((control) => onChange(control.key, defaultVideoSettings[control.key]))}
+        onClick={onReset}
       >
-        重置
+        
       </button>
+      <button
+        className="video-reset"
+        type="button"
+        onClick={() => {
+          navigator.clipboard?.writeText(fixedParamsText);
+        }}
+      >
+        Copy fixed params
+      </button>
+      <code>{fixedParamsText}</code>
       <code>{cssText}</code>
     </aside>
   );
 }
 
 function Experience() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useGsapSectionScrubReveal(sectionRef, "about");
+  const shouldLoadLanyard = useLoadNearViewport(sectionRef, "700px 0px");
+
+  const [aboutContentSettings, setAboutContentSettings] = useState(() => {
+    try {
+      return {
+        ...defaultAboutContentSettings,
+        ...JSON.parse(localStorage.getItem("aboutContentSettings") || "{}"),
+      };
+    } catch {
+      return defaultAboutContentSettings;
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("aboutContentSettings", JSON.stringify(aboutContentSettings));
+  }, [aboutContentSettings]);
+
+  const updateAboutContentSetting = (key, value) => {
+    setAboutContentSettings((current) => ({ ...current, [key]: Number(value) }));
+  };
+
+  const resetAboutContentSettings = () => {
+    setAboutContentSettings(defaultAboutContentSettings);
+  };
+
+  const aboutContentStyle = {
+    "--about-content-x": `${aboutContentSettings.x}px`,
+    "--about-content-y": `${aboutContentSettings.y}px`,
+    "--about-content-width": `${aboutContentSettings.width}px`,
+    "--about-heading-x": `${aboutContentSettings.headingX}px`,
+    "--about-heading-y": `${aboutContentSettings.headingY}px`,
+    "--about-heading-width": `${aboutContentSettings.headingWidth}px`,
+    "--about-heading-gap": `${aboutContentSettings.headingGap}px`,
+    "--about-kicker-size": `${aboutContentSettings.kickerSize}px`,
+    "--about-kicker-letter-spacing": `${aboutContentSettings.kickerLetterSpacing}em`,
+    "--about-title-size": `${aboutContentSettings.titleSize}px`,
+    "--about-title-line-height": aboutContentSettings.titleLineHeight,
+    "--about-title-letter-spacing": `${aboutContentSettings.titleLetterSpacing}em`,
+    "--about-description-size": `${aboutContentSettings.descriptionSize}px`,
+    "--about-description-top": `${aboutContentSettings.descriptionTop}px`,
+    "--about-description-line-height": aboutContentSettings.descriptionLineHeight,
+    "--about-description-letter-spacing": `${aboutContentSettings.descriptionLetterSpacing}em`,
+    "--about-experience-x": `${aboutContentSettings.experienceX}px`,
+    "--about-experience-y": `${aboutContentSettings.experienceY}px`,
+    "--about-experience-width": `${aboutContentSettings.experienceWidth}px`,
+    "--about-experience-top": `${aboutContentSettings.experienceTop}px`,
+    "--about-experience-gap": `${aboutContentSettings.experienceGap}px`,
+    "--about-card-height": `${aboutContentSettings.cardHeight}px`,
+    "--about-card-padding-x": `${aboutContentSettings.cardPaddingX}px`,
+    "--about-card-padding-y": `${aboutContentSettings.cardPaddingY}px`,
+    "--about-card-time-size": `${aboutContentSettings.cardTimeSize}px`,
+    "--about-card-time-gap": `${aboutContentSettings.cardTimeGap}px`,
+    "--about-card-title-size": `${aboutContentSettings.cardTitleSize}px`,
+    "--about-card-title-line-height": aboutContentSettings.cardTitleLineHeight,
+    "--about-card-text-size": `${aboutContentSettings.cardTextSize}px`,
+    "--about-card-text-top": `${aboutContentSettings.cardTextTop}px`,
+    "--about-card-text-line-height": aboutContentSettings.cardTextLineHeight,
+    "--about-card-letter-spacing": `${aboutContentSettings.cardLetterSpacing}em`,
+    "--about-contact-x": `${aboutContentSettings.contactX}px`,
+    "--about-contact-y": `${aboutContentSettings.contactY}px`,
+    "--about-contact-width": `${aboutContentSettings.contactWidth}px`,
+    "--about-contact-top": `${aboutContentSettings.contactTop}px`,
+    "--about-contact-gap": `${aboutContentSettings.contactGap}px`,
+    "--about-contact-padding-x": `${aboutContentSettings.contactPaddingX}px`,
+    "--about-contact-padding-y": `${aboutContentSettings.contactPaddingY}px`,
+    "--about-contact-font-size": `${aboutContentSettings.contactFontSize}px`,
+    "--about-contact-icon-gap": `${aboutContentSettings.contactIconGap}px`,
+    "--about-stats-x": `${aboutContentSettings.statsX}px`,
+    "--about-stats-y": `${aboutContentSettings.statsY}px`,
+    "--about-stats-width": `${aboutContentSettings.statsWidth}px`,
+    "--about-stats-top": `${aboutContentSettings.statsTop}px`,
+    "--about-stats-gap": `${aboutContentSettings.statsGap}px`,
+    "--about-stat-height": `${aboutContentSettings.statHeight}px`,
+    "--about-stat-padding-x": `${aboutContentSettings.statPaddingX}px`,
+    "--about-stat-padding-y": `${aboutContentSettings.statPaddingY}px`,
+    "--about-stat-value-size": `${aboutContentSettings.statValueSize}px`,
+    "--about-stat-value-line-height": aboutContentSettings.statValueLineHeight,
+    "--about-stat-value-bottom": `${aboutContentSettings.statValueBottom}px`,
+    "--about-stat-label-size": `${aboutContentSettings.statLabelSize}px`,
+    "--about-stat-label-line-height": aboutContentSettings.statLabelLineHeight,
+    "--about-stat-letter-spacing": `${aboutContentSettings.statLetterSpacing}em`,
+  } as React.CSSProperties;
+
   return (
-    <section className="section about" id="about">
+    <section ref={sectionRef} className="section about" id="about">
       <div className="container about-layout">
-        <div className="portrait-panel profile-lanyard-panel">
-          <div className="profile-lanyard" aria-label="可拖动的互动工牌">
-          <Lanyard
-            position={[0, 0, 25]}
-            gravity={[0, -38, 0]}
-            fov={20}
-            transparent
-            frontImage="/assets/lanyard/work-card-front.png"
-            backImage="/assets/lanyard/work-card-front.png"
-            imageFit="contain"
-            lanyardWidth={1.18}
-            cardScale={2.52}
-          />
-          </div>
+        <div className="resume-badge-slot about-lanyard about-lanyard-stage" aria-label="可拖拽工作证">
+          {shouldLoadLanyard ? (
+            <Suspense fallback={<div className="lanyard-placeholder" aria-hidden="true" />}>
+              <Lanyard
+                position={[0, 0, 20]}
+                gravity={[0, -40, 0]}
+                fov={10}
+                transparent={true}
+                frontImage="/assets/lanyard/work-permit-front.png"
+                imageFit="contain"
+                lanyardColor="#E84B32"
+                lanyardWidth={1}
+              />
+            </Suspense>
+          ) : (
+            <div className="lanyard-placeholder" aria-hidden="true" />
+          )}
         </div>
-        <div className="about-copy">
-          <span className="section-kicker">个人经历</span>
-          <h2>视觉设计、AI 美术创作与三维产品内容的复合型执行者。</h2>
-          <p>
-            毕业于广州华立科技职业学院动漫制作技术专业，具备从 AI 概念设计、产品商业渲染、
-            页面视觉优化到短视频内容产出的完整执行能力。曾在深圳市和承有限公司负责亚马逊、
-            淘宝、TikTok、Instagram 与独立站等平台视觉内容搭建，覆盖产品主副图、详情页、
-            动态动画和社媒素材。
-          </p>
-          <div className="timeline">
-            <div>
+        <div className="about-copy about-content" style={aboutContentStyle} data-about-content>
+          <div className="about-heading">
+            <h2 className="about-title" data-about-title>
+              <span className="about-title-line">视觉设计、三维渲染</span>
+              <span className="about-title-line">——</span>
+            </h2>
+            <p className="about-summary about-description" data-about-description>
+              毕业于广州华立科技职业学院动漫制作技术专业，具备从 AI 概念设计、产品商业渲染、
+              页面视觉优化到短视频内容产出的完整执行能力。曾在深圳市和承有限公司负责亚马逊、
+              淘宝、TikTok、Instagram 与独立站等平台视觉内容搭建，覆盖产品主副图、详情页、
+              动态动画和社媒素材。
+            </p>
+          </div>
+          <div className="timeline experience-list">
+            <div className="experience-card" data-about-experience>
               <time>2025.5 - 2026.5</time>
               <strong>深圳市和承有限公司 / 产品渲染师</strong>
               <p>负责多平台电商视觉、产品动态动画、独立站页面优化与短视频内容制作。</p>
             </div>
-            <div>
+            <div className="experience-card" data-about-experience>
               <time>2023.9 - 2026.6</time>
               <strong>广州华立科技职业学院 / 动漫制作技术</strong>
               <p>熟悉 Photoshop、After Effects、Premiere Pro、Cinema 4D、Octane 等工具。</p>
             </div>
           </div>
-          <div className="contact-strip">
+          <div className="contact-strip about-contact" data-about-contact>
             <span>
               <Phone size={16} />
               {contact.phone}
@@ -1306,21 +2259,164 @@ function Experience() {
               {contact.location}
             </span>
           </div>
-          <div className="stats-grid">
+          <div className="stats-grid about-stats">
             {stats.map((item) => (
-              <div className="stat-card" key={item.label}>
-                <strong>{item.value}</strong>
-                <span>{item.label}</span>
+              <div
+                className="stat-card about-stat"
+                data-about-stat
+                key={item.label}
+              >
+                <strong className="about-stat-value">{item.value}</strong>
+                <span className="about-stat-label">{item.label}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
+      {shouldShowTuningControls() && (
+        <AboutContentTuningPanel
+          settings={aboutContentSettings}
+          onChange={updateAboutContentSetting}
+          onReset={resetAboutContentSettings}
+        />
+      )}
     </section>
   );
 }
 
+function AboutContentTuningPanel({ settings, onChange, onReset }) {
+  const [collapsed, setCollapsed] = useState(true);
+  const controlGroups = [
+    {
+      title: "",
+      controls: [
+        { key: "x", label: "ˮƽλ", min: -240, max: 120, step: 1, suffix: "px" },
+        { key: "y", label: "ֱλ", min: -220, max: 180, step: 1, suffix: "px" },
+        { key: "width", label: "ݿ", min: 560, max: 1120, step: 10, suffix: "px" },
+      ],
+    },
+    {
+      title: "",
+      controls: [
+        { key: "headingX", label: "", min: -160, max: 160, step: 1, suffix: "px" },
+        { key: "headingY", label: "", min: -120, max: 120, step: 1, suffix: "px" },
+        { key: "headingWidth", label: "", min: 520, max: 1120, step: 10, suffix: "px" },
+        { key: "kickerSize", label: "Сֺ", min: 9, max: 18, step: 1, suffix: "px" },
+        { key: "kickerLetterSpacing", label: "С־", min: -0.06, max: 0.18, step: 0.01, suffix: "em" },
+        { key: "headingGap", label: "Ͼ", min: 0, max: 56, step: 1, suffix: "px" },
+        { key: "titleSize", label: "ֺ", min: 48, max: 96, step: 1, suffix: "px" },
+        { key: "titleLineHeight", label: "и", min: 0.82, max: 1.12, step: 0.01, suffix: "" },
+        { key: "titleLetterSpacing", label: "־", min: -0.08, max: 0.04, step: 0.005, suffix: "em" },
+        { key: "descriptionTop", label: "Ͼ", min: 8, max: 56, step: 1, suffix: "px" },
+        { key: "descriptionSize", label: "ֺ", min: 11, max: 18, step: 1, suffix: "px" },
+        { key: "descriptionLineHeight", label: "и", min: 1.1, max: 2, step: 0.01, suffix: "" },
+        { key: "descriptionLetterSpacing", label: "־", min: -0.04, max: 0.08, step: 0.005, suffix: "em" },
+      ],
+    },
+    {
+      title: "Ƭ",
+      controls: [
+        { key: "experienceX", label: "", min: -160, max: 160, step: 1, suffix: "px" },
+        { key: "experienceY", label: "", min: -120, max: 120, step: 1, suffix: "px" },
+        { key: "experienceWidth", label: "", min: 460, max: 1120, step: 10, suffix: "px" },
+        { key: "experienceTop", label: "Ͼ", min: 12, max: 96, step: 1, suffix: "px" },
+        { key: "experienceGap", label: "Ƭ", min: 6, max: 32, step: 1, suffix: "px" },
+        { key: "cardHeight", label: "Ƭ߶", min: 90, max: 220, step: 1, suffix: "px" },
+        { key: "cardPaddingX", label: "ھ", min: 12, max: 44, step: 1, suffix: "px" },
+        { key: "cardPaddingY", label: "ھ", min: 10, max: 36, step: 1, suffix: "px" },
+        { key: "cardTimeSize", label: "ֺ", min: 9, max: 16, step: 1, suffix: "px" },
+        { key: "cardTimeGap", label: "¾", min: 0, max: 18, step: 1, suffix: "px" },
+        { key: "cardTitleSize", label: "Ƭ", min: 16, max: 36, step: 1, suffix: "px" },
+        { key: "cardTitleLineHeight", label: "и", min: 0.95, max: 1.45, step: 0.01, suffix: "" },
+        { key: "cardTextSize", label: "Ƭ", min: 10, max: 18, step: 1, suffix: "px" },
+        { key: "cardTextTop", label: "Ͼ", min: 0, max: 20, step: 1, suffix: "px" },
+        { key: "cardTextLineHeight", label: "и", min: 1, max: 1.8, step: 0.01, suffix: "" },
+        { key: "cardLetterSpacing", label: "Ƭ־", min: -0.04, max: 0.08, step: 0.005, suffix: "em" },
+      ],
+    },
+    {
+      title: "ϵʽ",
+      controls: [
+        { key: "contactX", label: "ϵ", min: -160, max: 160, step: 1, suffix: "px" },
+        { key: "contactY", label: "ϵ", min: -80, max: 80, step: 1, suffix: "px" },
+        { key: "contactWidth", label: "ϵ", min: 420, max: 1120, step: 10, suffix: "px" },
+        { key: "contactTop", label: "ϵϾ", min: 6, max: 48, step: 1, suffix: "px" },
+        { key: "contactGap", label: "ť", min: 4, max: 28, step: 1, suffix: "px" },
+        { key: "contactPaddingX", label: "ھ", min: 8, max: 28, step: 1, suffix: "px" },
+        { key: "contactPaddingY", label: "ھ", min: 6, max: 18, step: 1, suffix: "px" },
+        { key: "contactFontSize", label: "ϵֺ", min: 10, max: 18, step: 1, suffix: "px" },
+        { key: "contactIconGap", label: "ͼ", min: 4, max: 18, step: 1, suffix: "px" },
+      ],
+    },
+    {
+      title: "ײ",
+      controls: [
+        { key: "statsX", label: "", min: -160, max: 160, step: 1, suffix: "px" },
+        { key: "statsY", label: "", min: -100, max: 100, step: 1, suffix: "px" },
+        { key: "statsWidth", label: "", min: 420, max: 1120, step: 10, suffix: "px" },
+        { key: "statsTop", label: "Ͼ", min: 6, max: 56, step: 1, suffix: "px" },
+        { key: "statsGap", label: "ݼ", min: 4, max: 28, step: 1, suffix: "px" },
+        { key: "statHeight", label: "ݸ߶", min: 56, max: 140, step: 1, suffix: "px" },
+        { key: "statPaddingX", label: "ھ", min: 8, max: 28, step: 1, suffix: "px" },
+        { key: "statPaddingY", label: "ھ", min: 6, max: 24, step: 1, suffix: "px" },
+        { key: "statValueSize", label: "ֺ", min: 16, max: 30, step: 1, suffix: "px" },
+        { key: "statValueLineHeight", label: "и", min: 0.9, max: 1.5, step: 0.01, suffix: "" },
+        { key: "statValueBottom", label: "¾", min: 0, max: 18, step: 1, suffix: "px" },
+        { key: "statLabelSize", label: "˵ֺ", min: 10, max: 16, step: 1, suffix: "px" },
+        { key: "statLabelLineHeight", label: "˵и", min: 1, max: 1.8, step: 0.01, suffix: "" },
+        { key: "statLetterSpacing", label: "־", min: -0.04, max: 0.08, step: 0.005, suffix: "em" },
+      ],
+    },
+  ];
+
+  const controls = controlGroups.flatMap((group) => group.controls);
+  const cssText = `x: ${settings.x}px; y: ${settings.y}px; width: ${settings.width}px; title: ${settings.titleSize}px; card: ${settings.cardHeight}px;`;
+
+  if (collapsed) {
+    return (
+      <button className="about-content-tuning-toggle" type="button" onClick={() => setCollapsed(false)}>
+        ݿ̨
+      </button>
+    );
+  }
+
+  return (
+    <aside className="about-content-tuning-panel" aria-label="˾λÿ̨">
+      <div className="video-tuning-header">
+        <div className="video-tuning-title">˾ݿ̨</div>
+        <button className="video-collapse" type="button" onClick={() => setCollapsed(true)}></button>
+      </div>
+      {controlGroups.map((group) => (
+        <div className="about-control-group" key={group.title}>
+          <div className="about-control-group-title">{group.title}</div>
+          {group.controls.map((control) => (
+            <label className="video-control" key={control.key}>
+              <span>
+                {control.label}
+                <strong>{settings[control.key]}{control.suffix}</strong>
+              </span>
+              <input
+                type="range"
+                min={control.min}
+                max={control.max}
+                step={control.step}
+                value={settings[control.key]}
+                onChange={(event) => onChange(control.key, event.target.value)}
+              />
+            </label>
+          ))}
+        </div>
+      ))}
+      <button className="video-reset" type="button" onClick={onReset}>
+        λ
+      </button>
+      <code>{cssText}</code>
+    </aside>
+  );
+}
+
 function Projects({ onOpenModule, initialModuleId, onActiveModuleChange }) {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [imagePanelOpen, setImagePanelOpen] = useState(false);
   const initialModuleIndex = Math.max(0, portfolioModules.findIndex((module) => module.id === initialModuleId));
   const [activeModuleIndex, setActiveModuleIndex] = useState(initialModuleIndex);
@@ -1346,6 +2442,9 @@ function Projects({ onOpenModule, initialModuleId, onActiveModuleChange }) {
   const pointerMovedRef = useRef(false);
   const suppressClickRef = useRef(false);
   const openTimerRef = useRef<number | null>(null);
+  const coverflowUnlockTimerRef = useRef<number | null>(null);
+  const [coverflowAnimating, setCoverflowAnimating] = useState(false);
+  const shouldPreloadModuleCovers = useLoadNearViewport(sectionRef, "400px 0px");
 
   useEffect(() => {
     localStorage.setItem("moduleImageSettings", JSON.stringify(imageSettings));
@@ -1354,6 +2453,9 @@ function Projects({ onOpenModule, initialModuleId, onActiveModuleChange }) {
   useEffect(() => () => {
     if (openTimerRef.current) {
       window.clearTimeout(openTimerRef.current);
+    }
+    if (coverflowUnlockTimerRef.current) {
+      window.clearTimeout(coverflowUnlockTimerRef.current);
     }
   }, []);
 
@@ -1407,7 +2509,26 @@ function Projects({ onOpenModule, initialModuleId, onActiveModuleChange }) {
   const isWheelLocked = () => performance.now() < wheelLockedUntilRef.current;
 
   const lockWheel = () => {
-    wheelLockedUntilRef.current = performance.now() + 620;
+    wheelLockedUntilRef.current = performance.now() + 900;
+  };
+
+  const startCoverflowAnimationLock = () => {
+    setCoverflowAnimating(true);
+    if (coverflowUnlockTimerRef.current) {
+      window.clearTimeout(coverflowUnlockTimerRef.current);
+    }
+    coverflowUnlockTimerRef.current = window.setTimeout(() => {
+      setCoverflowAnimating(false);
+      coverflowUnlockTimerRef.current = null;
+    }, 900);
+  };
+
+  const releaseCoverflowAnimationLock = () => {
+    if (coverflowUnlockTimerRef.current) {
+      window.clearTimeout(coverflowUnlockTimerRef.current);
+      coverflowUnlockTimerRef.current = null;
+    }
+    setCoverflowAnimating(false);
   };
 
   const getCircularOffset = (index, currentIndex = activeModuleIndexRef.current) => {
@@ -1419,11 +2540,12 @@ function Projects({ onOpenModule, initialModuleId, onActiveModuleChange }) {
   };
 
   const shiftCoverflow = (direction) => {
-    if (isWheelLocked() || openingModuleId) return false;
+    if (isWheelLocked() || openingModuleId || coverflowAnimating) return false;
     const currentIndex = activeModuleIndexRef.current;
     const nextIndex = (currentIndex + direction + portfolioModules.length) % portfolioModules.length;
     if (nextIndex === currentIndex) return false;
     lockWheel();
+    startCoverflowAnimationLock();
     wheelDeltaRef.current = 0;
     wheelDirectionRef.current = 0;
     activeModuleIndexRef.current = nextIndex;
@@ -1434,8 +2556,9 @@ function Projects({ onOpenModule, initialModuleId, onActiveModuleChange }) {
   };
 
   const selectCoverflowIndex = (index) => {
-    if (isWheelLocked() || openingModuleId || index === activeModuleIndexRef.current) return false;
+    if (isWheelLocked() || openingModuleId || coverflowAnimating || index === activeModuleIndexRef.current) return false;
     lockWheel();
+    startCoverflowAnimationLock();
     wheelDeltaRef.current = 0;
     wheelDirectionRef.current = 0;
     activeModuleIndexRef.current = index;
@@ -1451,6 +2574,18 @@ function Projects({ onOpenModule, initialModuleId, onActiveModuleChange }) {
     const image = new Image();
     image.src = cover.src;
   };
+
+  const preloadModuleNeighborhood = (index) => {
+    [-1, 0, 1].forEach((step) => {
+      const module = portfolioModules[(index + step + portfolioModules.length) % portfolioModules.length];
+      if (module) preloadModuleCover(module);
+    });
+  };
+
+  useEffect(() => {
+    if (!shouldPreloadModuleCovers) return;
+    preloadModuleNeighborhood(activeModuleIndex);
+  }, [activeModuleIndex, shouldPreloadModuleCovers]);
 
   const beginModuleOpen = (module) => {
     if (openingModuleId) return;
@@ -1559,18 +2694,17 @@ function Projects({ onOpenModule, initialModuleId, onActiveModuleChange }) {
   });
 
   return (
-    <section className={`section projects${openingModuleId ? " is-route-exiting" : ""}`} id="work">
+    <section ref={sectionRef} className={`section projects${openingModuleId ? " is-route-exiting" : ""}`} id="work">
       <div className="container">
         <div className="section-head projects-head">
-          <span className="section-kicker">Selected Works</span>
-          <h2>以产品渲染、动态影像和电商视觉组织的作品索引。</h2>
+          <h2>产品渲染、产品动态</h2>
         </div>
 
         <div
           className={`coverflow-shell${openingModuleId ? " is-opening" : ""}`}
           ref={coverflowRef}
           role="region"
-          aria-label="作品 Coverflow 轮播，使用鼠标滚轮、拖拽或左右方向键切换"
+          aria-label="作品 Coverflow 轮播，可使用方向键或拖拽切换"
           tabIndex={0}
           onKeyDown={handleCoverflowKeyDown}
           onPointerDown={handlePointerDown}
@@ -1578,75 +2712,102 @@ function Projects({ onOpenModule, initialModuleId, onActiveModuleChange }) {
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerCancel}
         >
-          <div className="coverflow-track" aria-label="作品大模块目录">
-          {portfolioModules.map((module, index) => (
-            (() => {
+          <div className="coverflow-track" aria-label="作品模块目录">
+            {portfolioModules.map((module, index) => {
               const offset = getCircularOffset(index, activeModuleIndex);
               const absOffset = Math.abs(offset);
+              const getCardMotionState = (cardOffset) => {
+                if (cardOffset === 0) {
+                  return { x: 0, scale: 1, opacity: 1, filter: "brightness(1)", zIndex: 5 };
+                }
+                if (cardOffset === -1) {
+                  return { x: -250, scale: 0.82, opacity: 0.58, filter: "brightness(0.5)", zIndex: 4 };
+                }
+                if (cardOffset === 1) {
+                  return { x: 250, scale: 0.82, opacity: 0.58, filter: "brightness(0.5)", zIndex: 4 };
+                }
+                if (cardOffset === -2) {
+                  return { x: -430, scale: 0.68, opacity: 0.25, filter: "brightness(0.3)", zIndex: 2 };
+                }
+                if (cardOffset === 2) {
+                  return { x: 430, scale: 0.68, opacity: 0.25, filter: "brightness(0.3)", zIndex: 2 };
+                }
+
+                return {
+                  x: cardOffset < 0 ? -560 : 560,
+                  scale: 0.58,
+                  opacity: 0,
+                  filter: "brightness(0.22)",
+                  zIndex: 1,
+                };
+              };
+              const cardMotionState = getCardMotionState(offset);
               const cardStyle = {
-                transform: `translate3d(calc(-50% + ${offset * 360}px), -50%, ${absOffset * -150}px) rotateY(${offset * -14}deg) scale(${Math.max(0.68, 1 - absOffset * 0.1)})`,
-                opacity: Math.max(0.18, 1 - absOffset * 0.16),
-                zIndex: portfolioModules.length - absOffset,
-                pointerEvents: absOffset > 3 ? "none" as const : "auto" as const,
+                zIndex: cardMotionState.zIndex,
+                pointerEvents: absOffset > 2 || coverflowAnimating ? "none" as const : "auto" as const,
+                transform: `translate(-50%, -50%) translateX(${cardMotionState.x}px) scale(${cardMotionState.scale})`,
+                opacity: cardMotionState.opacity,
+                filter: cardMotionState.filter,
               };
 
               return (
-            <button
-              className={`coverflow-card${index === activeModuleIndex ? " is-active" : ""}${openingModuleId === module.id ? " is-opening-target" : ""}${imagePanelOpen && module.id === selectedModuleId ? " tuning-selected" : ""}`}
-              type="button"
-              key={module.id}
-              data-index={index}
-              style={cardStyle}
-              aria-current={index === activeModuleIndex ? "true" : undefined}
-              aria-label={`${module.title}，点击进入项目页面`}
-              onClick={() => {
-                if (suppressClickRef.current) {
-                  suppressClickRef.current = false;
-                  return;
-                }
-                const currentIndex = activeModuleIndexRef.current;
-                if (index === currentIndex) {
-                  beginModuleOpen(module);
-                  return;
-                }
-                shiftCoverflow(getCircularOffset(index, currentIndex) > 0 ? 1 : -1);
-              }}
-            >
-              <PortfolioMedia item={{ ...getModuleCoverItem(module), title: module.title, playPreview: false }} preview style={getModuleMediaStyle(module.id)} />
-              {imagePanelOpen && module.id === selectedModuleId && <span className="module-tuning-badge">正在调整</span>}
-              <div className="module-card-copy coverflow-card-copy">
-                <span>{module.tag}</span>
-                <h3>{module.title}</h3>
-                <p>{module.desc}</p>
-                <div>
-                  <strong>{String(index + 1).padStart(2, "0")}</strong>
-                  <em>{module.meta}</em>
-                  <ArrowUpRight size={18} />
-                </div>
-              </div>
-            </button>
+                <button
+                  className={`coverflow-card${index === activeModuleIndex ? " is-active" : ""}${openingModuleId === module.id ? " is-opening-target" : ""}${imagePanelOpen && module.id === selectedModuleId ? " tuning-selected" : ""}`}
+                  type="button"
+                  key={module.id}
+                  data-index={index}
+                  style={cardStyle}
+                  onTransitionEnd={(event) => {
+                    if (event.propertyName === "transform" && index === activeModuleIndexRef.current) {
+                      releaseCoverflowAnimationLock();
+                    }
+                  }}
+                  aria-current={index === activeModuleIndex ? "true" : undefined}
+                  aria-label={`${module.title}Ŀҳ`}
+                  onClick={() => {
+                    if (suppressClickRef.current) {
+                      suppressClickRef.current = false;
+                      return;
+                    }
+                    if (coverflowAnimating) return;
+                    const currentIndex = activeModuleIndexRef.current;
+                    if (index === currentIndex) {
+                      beginModuleOpen(module);
+                      return;
+                    }
+                    shiftCoverflow(getCircularOffset(index, currentIndex) > 0 ? 1 : -1);
+                  }}
+                >
+                  <PortfolioMedia item={{ ...getModuleCoverItem(module), title: module.title, playPreview: false }} preview style={getModuleMediaStyle(module.id)} />
+                  {imagePanelOpen && module.id === selectedModuleId && <span className="module-tuning-badge">ڵ</span>}
+                  <div className="module-card-copy coverflow-card-copy">
+                    <span>{module.tag}</span>
+                    <h3>{module.title}</h3>
+                  </div>
+                </button>
               );
-            })()
-          ))}
-          </div>
-          <div className="coverflow-status" aria-hidden="true">
-            <span>{String(activeModuleIndex + 1).padStart(2, "0")}</span>
-            <strong>{portfolioModules[activeModuleIndex].title}</strong>
-            <em>{portfolioModules[activeModuleIndex].meta}</em>
+            })}
+            <div
+              className="coverflow-glow"
+              aria-hidden="true"
+              style={{ opacity: openingModuleId ? 0.24 : 0.68 }}
+            />
           </div>
           {openingModuleId && <div className="route-transition-scrim" aria-hidden="true" />}
         </div>
       </div>
-      <ModuleImageTuningPanel
-        modules={portfolioModules}
-        selectedModuleId={selectedModuleId}
-        onSelectModule={handleSelectModule}
-        open={imagePanelOpen}
-        onOpenChange={setImagePanelOpen}
-        settings={selectedImageSettings}
-        onChange={updateImageSetting}
-        onReset={resetSelectedImageSetting}
-      />
+      {shouldShowTuningControls() && (
+        <ModuleImageTuningPanel
+          modules={portfolioModules}
+          selectedModuleId={selectedModuleId}
+          onSelectModule={handleSelectModule}
+          open={imagePanelOpen}
+          onOpenChange={setImagePanelOpen}
+          settings={selectedImageSettings}
+          onChange={updateImageSetting}
+          onReset={resetSelectedImageSetting}
+        />
+      )}
     </section>
   );
 }
@@ -1654,31 +2815,31 @@ function Projects({ onOpenModule, initialModuleId, onActiveModuleChange }) {
 function ModuleImageTuningPanel({ modules, selectedModuleId, onSelectModule, open, onOpenChange, settings, onChange, onReset }) {
   const selectedModule = modules.find((module) => module.id === selectedModuleId) || modules[0];
   const controls = [
-    { key: "x", label: "水平位置", min: 0, max: 100, step: 1, suffix: "%" },
-    { key: "y", label: "垂直位置", min: 0, max: 100, step: 1, suffix: "%" },
-    { key: "scale", label: "图片大小", min: 0.7, max: 1.8, step: 0.01, suffix: "x" },
+    { key: "x", label: "ˮƽλ", min: 0, max: 100, step: 1, suffix: "%" },
+    { key: "y", label: "ֱλ", min: 0, max: 100, step: 1, suffix: "%" },
+    { key: "scale", label: "ͼƬС", min: 0.7, max: 1.8, step: 0.01, suffix: "x" },
   ];
 
   if (!open) {
     return (
       <button className="module-image-tuning-toggle" type="button" onClick={() => onOpenChange(true)}>
-        图片控制台
+        ͼƬ̨
       </button>
     );
   }
 
   return (
-    <aside className="module-image-tuning-panel" aria-label="作品模块图片调整控制台">
+    <aside className="module-image-tuning-panel" aria-label="ƷģͼƬ̨">
       <div className="video-tuning-header">
-        <div className="video-tuning-title">作品图片控制台</div>
-        <button className="video-collapse" type="button" onClick={() => onOpenChange(false)}>收起</button>
+        <div className="video-tuning-title">ƷͼƬ̨</div>
+        <button className="video-collapse" type="button" onClick={() => onOpenChange(false)}></button>
       </div>
       <div className="module-image-current">
-        <span>当前调整</span>
+        <span>ǰ</span>
         <strong>{selectedModule?.title}</strong>
       </div>
       <label className="module-image-select">
-        <span>选择图片</span>
+        <span>ѡͼƬ</span>
         <select value={selectedModuleId} onChange={(event) => onSelectModule(event.target.value)}>
           {modules.map((module) => (
             <option value={module.id} key={module.id}>
@@ -1708,9 +2869,88 @@ function ModuleImageTuningPanel({ modules, selectedModuleId, onSelectModule, ope
         type="button"
         onClick={onReset}
       >
-        重置当前图片
+        õǰͼƬ
       </button>
     </aside>
+  );
+}
+
+function LazyPortfolioVideo({ item, preview = false, style = undefined }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const shouldAutoPreview = preview && item.playPreview !== false;
+
+  useEffect(() => {
+    if (shouldLoad) return undefined;
+    const video = videoRef.current;
+    if (!video) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "0px", threshold: 0.01 },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [shouldLoad]);
+
+  return (
+    <video
+      ref={videoRef}
+      className="portfolio-media"
+      style={style}
+      controls={!preview}
+      autoPlay={shouldLoad && shouldAutoPreview}
+      loop={shouldAutoPreview}
+      muted
+      playsInline
+      preload={shouldLoad ? "metadata" : "none"}
+    >
+      {shouldLoad ? <source src={item.src} type="video/mp4" /> : null}
+    </video>
+  );
+}
+
+function LazyPortfolioImage({ item, label, style = undefined }) {
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(item.loading === "eager");
+
+  useEffect(() => {
+    if (shouldLoad) return undefined;
+    const image = imageRef.current;
+    if (!image) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px", threshold: 0.01 },
+    );
+
+    observer.observe(image);
+    return () => observer.disconnect();
+  }, [shouldLoad]);
+
+  return (
+    <img
+      ref={imageRef}
+      className="portfolio-media"
+      style={style}
+      src={shouldLoad ? item.src : undefined}
+      alt={label}
+      loading={item.loading || "lazy"}
+      decoding="async"
+      width={item.width}
+      height={item.height}
+    />
   );
 }
 
@@ -1718,151 +2958,75 @@ function PortfolioMedia({ item, preview = false, style = undefined }) {
   const label = item.title || item.original || "portfolio media";
 
   if (item.media === "video") {
-    const shouldAutoPreview = preview && item.playPreview !== false;
-    return (
-      <video className="portfolio-media" style={style} controls={!preview} autoPlay={shouldAutoPreview} loop={shouldAutoPreview} muted playsInline preload="metadata">
-        <source src={item.src} type="video/mp4" />
-      </video>
-    );
+    return <LazyPortfolioVideo item={item} preview={preview} style={style} />;
   }
 
-  return <img className="portfolio-media" style={style} src={item.src} alt={label} loading="lazy" />;
+  return <LazyPortfolioImage item={item} label={label} style={style} />;
 }
 
-const COMMERCE_MODEL_URL = "/models/commerce/switch-controller-pbr-v2.glb";
-const COMMERCE_MODEL_INITIAL_ROTATION: [number, number, number] = [0, 0, 0];
+function LongformShowcase({ module, onPreview }) {
+  const columns = module.works.reduce(
+    (result, item, index) => {
+      const meta = longformImageMeta[item.src] || {};
+      const visualHeight = meta.width && meta.height ? meta.height / meta.width : 1;
+      const columnIndex =
+        index < 3
+          ? index
+          : result.heights.indexOf(Math.min(...result.heights));
 
-function getCommerceProjectId(module, item) {
-  const index = module.works.findIndex((work) => work.src === item.src);
-  return `project-${String(Math.max(index, 0) + 1).padStart(2, "0")}`;
-}
+      result.columns[columnIndex].push({ item, index });
+      result.heights[columnIndex] += visualHeight;
+      return result;
+    },
+    { columns: [[], [], []], heights: [0, 0, 0] }
+  ).columns;
 
-function CommerceIntroPanel() {
-  return (
-    <div className="commerce-intro-panel">
-      <span>E-COMMERCE VISUAL</span>
-      <h3>产品三维视觉展示</h3>
-      <p>
-        围绕产品结构、材质与使用场景，建立统一的电商主图、卖点图和动态展示系统。
-      </p>
-    </div>
-  );
-}
-
-function CommerceModelAsset({ modelUrl, onReady }) {
-  const { scene } = useGLTF(modelUrl) as any;
-
-  useEffect(() => {
-    onReady();
-  }, [onReady, scene]);
-
-  return (
-    <group rotation={COMMERCE_MODEL_INITIAL_ROTATION}>
-      <primitive object={scene} />
-    </group>
-  );
-}
-
-useGLTF.preload(COMMERCE_MODEL_URL);
-
-function CommerceModelScene({ modelUrl, onReady }) {
-  return (
-    <>
-      <color attach="background" args={["#090b0d"]} />
-      <ambientLight intensity={1.2} />
-      <directionalLight position={[4, 5, 6]} intensity={2.5} />
-      <directionalLight position={[-4, 2, -3]} intensity={1.2} />
-      <Suspense fallback={null}>
-        <Bounds fit clip observe margin={1.2}>
-          <Center precise>
-            <CommerceModelAsset modelUrl={modelUrl} onReady={onReady} />
-          </Center>
-        </Bounds>
-      </Suspense>
-    </>
-  );
-}
-
-function CommerceModelViewer({ modelUrl, posterSrc }) {
-  const [isReady, setIsReady] = useState(false);
-  const [autoRotate, setAutoRotate] = useState(true);
-  const [hasInteracted, setHasInteracted] = useState(false);
-  const resumeTimerRef = useRef<number | null>(null);
-  const handleModelReady = useCallback(() => setIsReady(true), []);
-
-  useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) setAutoRotate(false);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
+  const renderLongformItem = ({ item, index }) => {
+    if (!item) return null;
+    const meta = longformImageMeta[item.src] || {};
+    const isFirst = index === 0;
+    const enrichedItem = {
+      ...item,
+      ...meta,
+      loading: "lazy",
     };
-  }, []);
+    const longformStyle = {
+      ...(meta.width && meta.height ? { "--longform-ratio": `${meta.width} / ${meta.height}` } : {}),
+      order: index,
+    } as React.CSSProperties;
 
-  const pauseAutoRotate = useCallback(() => {
-    if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
-    setAutoRotate(false);
-    setHasInteracted(true);
-  }, []);
-
-  const resumeAutoRotateLater = useCallback(() => {
-    if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reduceMotion) {
-      resumeTimerRef.current = window.setTimeout(() => setAutoRotate(true), 4000);
-    }
-  }, []);
-
-  return (
-    <div className={`commerce-model-viewer${isReady ? " is-ready" : ""}`}>
-      <Canvas
-        className="commerce-model-canvas"
-        dpr={[1, 1.6]}
-        camera={{ position: [0, 0, 6], fov: 35, near: 0.1, far: 1000 }}
-        gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+    return (
+      <article
+        className="longform-piece"
+        key={item.src}
+        role="button"
+        tabIndex={0}
+        style={longformStyle}
+        onClick={() => onPreview(item)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            onPreview(item);
+          }
+        }}
       >
-        <CommerceModelScene
-          modelUrl={modelUrl}
-          onReady={handleModelReady}
-        />
-        <OrbitControls
-          makeDefault
-          enableRotate={true}
-          enableZoom={true}
-          enablePan={false}
-          autoRotate={autoRotate}
-          autoRotateSpeed={0.35}
-          minPolarAngle={Math.PI * 0.1}
-          maxPolarAngle={Math.PI * 0.9}
-          onStart={pauseAutoRotate}
-          onEnd={resumeAutoRotateLater}
-        />
-      </Canvas>
-      <div className="commerce-model-poster" aria-hidden={isReady}>
-        <img src={posterSrc} alt="" />
-        <span>LOADING 3D MODEL</span>
-        <i />
-      </div>
-      <span className={`commerce-model-hint${hasInteracted ? " is-hidden" : ""}`}>DRAG TO ROTATE · SCROLL TO ZOOM</span>
-    </div>
-  );
-}
-
-function CommerceShowcase({ module }) {
-  const coverItem = getModuleCoverItem(module);
+        <PortfolioMedia item={enrichedItem} />
+      </article>
+    );
+  };
 
   return (
-    <div className="commerce-showcase">
-      <div className="commerce-showcase-main">
-        <CommerceIntroPanel />
-        <CommerceModelViewer modelUrl={COMMERCE_MODEL_URL} posterSrc={coverItem.src} />
+    <div className="longform-showcase" aria-label="长图详情页作品">
+      <div className="longform-masonry" aria-label="长图详情页瀑布展示">
+        {columns.map((column, columnIndex) => (
+          <div className="longform-column" key={`longform-column-${columnIndex}`}>
+            {column.map(renderLongformItem)}
+          </div>
+        ))}
       </div>
     </div>
   );
 }
-
 function normalizeCommerceGroups(groups) {
   if (!Array.isArray(groups)) return { groups: [] };
 
@@ -2076,7 +3240,7 @@ function CommerceWorksEditor({
     const nextGroup = {
       ...selectedGroup,
       id: `group-${Date.now()}`,
-      name: `${selectedGroup.name} 副本`,
+      name: `${selectedGroup.name} `,
       items: selectedGroup.items.map((item, index) => ({
         ...item,
         id: `${item.id}-copy-${index + 1}-${Date.now()}`,
@@ -2087,7 +3251,7 @@ function CommerceWorksEditor({
   };
 
   const deleteGroup = () => {
-    if (!selectedGroup || !window.confirm(`确定删除 ${selectedGroup.name} 吗？`)) return;
+    if (!selectedGroup || !window.confirm(`ȷɾ ${selectedGroup.name} `)) return;
     replaceGroups(groups.filter((group) => group.id !== selectedGroup.id));
   };
 
@@ -2098,7 +3262,7 @@ function CommerceWorksEditor({
   };
 
   const deleteItem = (itemIndex) => {
-    if (!selectedGroup || !window.confirm("确定删除这张作品图片吗？")) return;
+    if (!selectedGroup || !window.confirm("ȷɾƷͼƬ")) return;
     const nextItems = selectedGroup.items.filter((_, index) => index !== itemIndex);
     updateGroup({
       items: nextItems,
@@ -2109,7 +3273,7 @@ function CommerceWorksEditor({
   const uploadImage = async (file, itemIndex) => {
     if (!file) return;
     if (!["image/jpeg", "image/png", "image/webp", "image/avif"].includes(file.type)) {
-      alert("只支持 JPG、PNG、WebP、AVIF 图片。");
+      alert("ֻ֧ JPGPNGWebPAVIF ͼƬ");
       return;
     }
     const dataUrl = await new Promise((resolve, reject) => {
@@ -2127,10 +3291,10 @@ function CommerceWorksEditor({
         body: JSON.stringify({ fileName: file.name, dataUrl }),
       });
       const payload = await response.json();
-      if (!response.ok) throw new Error(payload.error || "上传失败");
+      if (!response.ok) throw new Error(payload.error || "ϴʧ");
       updateItem(itemIndex, { image: payload.src, alt: file.name.replace(/\.[^.]+$/, "") });
     } catch (error) {
-      alert(`图片已临时预览，但上传失败：${error instanceof Error ? error.message : String(error)}`);
+      alert(`ͼƬʱԤϴʧܣ${error instanceof Error ? error.message : String(error)}`);
     }
   };
 
@@ -2149,31 +3313,31 @@ function CommerceWorksEditor({
     try {
       const text = await file.text();
       const parsed = normalizeCommerceGroups(JSON.parse(text).groups);
-      if (!parsed.groups.length) throw new Error("JSON 中没有作品组。");
+      if (!parsed.groups.length) throw new Error("JSON ûƷ顣");
       replaceGroups(parsed.groups);
       setSelectedGroupId(parsed.groups[0].id);
     } catch (error) {
-      alert(`导入失败：${error instanceof Error ? error.message : String(error)}`);
+      alert(`ʧܣ${error instanceof Error ? error.message : String(error)}`);
     }
   };
 
   const closeEditor = () => {
-    if (dirty && !window.confirm("还有未保存的修改，是否放弃？")) return;
+    if (dirty && !window.confirm("δ޸ģǷ")) return;
     onClose();
   };
 
   return (
-    <aside className="commerce-works-editor" aria-label="电商作品编辑控制台">
+    <aside className="commerce-works-editor" aria-label="Ʒ༭̨">
       <div className="commerce-works-editor-head">
         <div>
           <span>LOCAL EDITOR</span>
-          <h4>作品图片控制台</h4>
+          <h4>ƷͼƬ̨</h4>
         </div>
-        <button type="button" onClick={closeEditor}>关闭</button>
+        <button type="button" onClick={closeEditor}>ر</button>
       </div>
 
       <div className="commerce-editor-section">
-        <label>作品组</label>
+        <label>Ʒ</label>
         <div className="commerce-group-list">
           {groups.map((group, index) => (
             <button
@@ -2182,29 +3346,29 @@ function CommerceWorksEditor({
               className={group.id === selectedGroup?.id ? "is-active" : ""}
               onClick={() => setSelectedGroupId(group.id)}
             >
-              第{index + 1}组 <small>{group.name}</small>
+              {index + 1} <small>{group.name}</small>
             </button>
           ))}
         </div>
         <div className="commerce-editor-buttons">
-          <button type="button" onClick={addGroup}>新增作品组</button>
-          <button type="button" onClick={copyGroup} disabled={!selectedGroup}>复制作品组</button>
-          <button type="button" onClick={deleteGroup} disabled={!selectedGroup}>删除作品组</button>
-          <button type="button" onClick={() => moveGroup(-1)} disabled={selectedGroupIndex <= 0}>上移组</button>
-          <button type="button" onClick={() => moveGroup(1)} disabled={selectedGroupIndex >= groups.length - 1}>下移组</button>
+          <button type="button" onClick={addGroup}>Ʒ</button>
+          <button type="button" onClick={copyGroup} disabled={!selectedGroup}>Ʒ</button>
+          <button type="button" onClick={deleteGroup} disabled={!selectedGroup}>ɾƷ</button>
+          <button type="button" onClick={() => moveGroup(-1)} disabled={selectedGroupIndex <= 0}></button>
+          <button type="button" onClick={() => moveGroup(1)} disabled={selectedGroupIndex >= groups.length - 1}></button>
         </div>
       </div>
 
       {selectedGroup && (
         <>
           <div className="commerce-editor-section">
-            <label>当前组设置</label>
+            <label>ǰ</label>
             <input
               value={selectedGroup.name}
               onChange={(event) => updateGroup({ name: event.target.value })}
-              placeholder="组名称"
+              placeholder=""
             />
-            <label>默认展开图片</label>
+            <label>ĬչͼƬ</label>
             <input
               type="number"
               min="1"
@@ -2218,19 +3382,19 @@ function CommerceWorksEditor({
 
           <div className="commerce-editor-section">
             <div className="commerce-section-row">
-              <label>组内图片</label>
-              <button type="button" onClick={addItem}>添加图片</button>
+              <label>ͼƬ</label>
+              <button type="button" onClick={addItem}>ͼƬ</button>
             </div>
             <div className="commerce-item-editor-list">
               {selectedGroup.items.map((item, itemIndex) => (
                 <div className="commerce-item-editor" key={item.id}>
-                  <img src={item.image || "/portfolio-full/commerce/commerce-01.webp"} alt={item.alt} />
+                  <img src={item.image || "/portfolio-full/commerce/commerce-01.jpg"} alt={item.alt} />
                   <div>
                     <strong>{item.alt || item.id}</strong>
                     <input
                       value={item.alt}
                       onChange={(event) => updateItem(itemIndex, { alt: event.target.value })}
-                      placeholder="替代文字"
+                      placeholder=""
                     />
                     <input
                       value={item.detailUrl}
@@ -2262,17 +3426,17 @@ function CommerceWorksEditor({
                     />
                     <div className="commerce-editor-buttons compact">
                       <label className="commerce-upload-button">
-                        更换图片
+                        ͼƬ
                         <input
                           type="file"
                           accept="image/jpeg,image/png,image/webp,image/avif"
                           onChange={(event) => uploadImage(event.target.files?.[0], itemIndex)}
                         />
                       </label>
-                      <button type="button" onClick={() => moveItem(itemIndex, -1)}>左移</button>
-                      <button type="button" onClick={() => moveItem(itemIndex, 1)}>右移</button>
-                      <button type="button" onClick={() => updateGroup({ defaultActiveIndex: itemIndex })}>默认展开</button>
-                      <button type="button" onClick={() => deleteItem(itemIndex)}>删除</button>
+                      <button type="button" onClick={() => moveItem(itemIndex, -1)}></button>
+                      <button type="button" onClick={() => moveItem(itemIndex, 1)}></button>
+                      <button type="button" onClick={() => updateGroup({ defaultActiveIndex: itemIndex })}>Ĭչ</button>
+                      <button type="button" onClick={() => deleteItem(itemIndex)}>ɾ</button>
                     </div>
                   </div>
                 </div>
@@ -2283,15 +3447,15 @@ function CommerceWorksEditor({
       )}
 
       <div className="commerce-editor-actions sticky">
-        <button type="button" onClick={onSave} disabled={saving}>{saving ? "保存中..." : "保存"}</button>
-        <button type="button" onClick={onReset}>取消修改</button>
+        <button type="button" onClick={onSave} disabled={saving}>{saving ? "..." : ""}</button>
+        <button type="button" onClick={onReset}>ȡ޸</button>
         <button type="button" onClick={() => selectedGroup && updateGroup({
           items: selectedGroup.items.map((item) => ({ ...item, objectFit: "cover", objectPositionX: 50, objectPositionY: 50 })),
           defaultActiveIndex: 0,
-        })}>重置当前组</button>
-        <button type="button" onClick={exportJson}>导出JSON</button>
+        })}>õǰ</button>
+        <button type="button" onClick={exportJson}>JSON</button>
         <label className="commerce-upload-button">
-          导入JSON
+          JSON
           <input type="file" accept="application/json" onChange={(event) => importJson(event.target.files?.[0])} />
         </label>
       </div>
@@ -2306,7 +3470,7 @@ function getCommerceProjectStorageKey(projectId) {
 function createDefaultCommerceProjectConfig(project) {
   return {
     id: project.id,
-    title: project.title || `电商作品 ${project.id.replace("project-", "")}`,
+    title: project.title || `Ʒ ${project.id.replace("project-", "")}`,
     images: [
       {
         id: "image-01",
@@ -2365,7 +3529,7 @@ function CommerceProjectDetail({ project, edit, onBack }) {
         </nav>
         <section className="commerce-detail-404">
           <span>404</span>
-          <h1>没有找到这个电商作品。</h1>
+          <h1>没有找到对应的作品页面</h1>
           <button type="button" onClick={onBack}>返回电商产品视觉</button>
         </section>
       </main>
@@ -2379,7 +3543,7 @@ function CommerceProjectDetail({ project, edit, onBack }) {
       localStorage.setItem(getCommerceProjectStorageKey(project.id), JSON.stringify(draftConfig));
       setConfig(draftConfig);
     } catch {
-      alert("保存失败：图片数据可能太大。请先导出 JSON 备份，或使用较小图片。");
+      alert("ʧܣͼƬݿ̫ȵ JSON ݣʹýСͼƬ");
     }
   };
 
@@ -2414,7 +3578,7 @@ function CommerceProjectDetail({ project, edit, onBack }) {
           </button>
           <span>{project.tag || "Commerce Visual"} / {project.id}</span>
           <h1>{displayConfig.title}</h1>
-          {!edit && ["localhost", "127.0.0.1"].includes(window.location.hostname) && (
+          {!edit && import.meta.env.DEV && ["localhost", "127.0.0.1"].includes(window.location.hostname) && (
             <a className="commerce-edit-link" href={`${commerceDetailBasePath}/${project.id}?edit=1`}>
               编辑模式
             </a>
@@ -2532,7 +3696,7 @@ function CommerceEditableImage({ image, index, editable, selected, onSelect, onC
           type="button"
           data-action="resize"
           onPointerDown={startDrag}
-          aria-label="调整图片大小"
+          aria-label="ͼƬС"
         />
       )}
     </figure>
@@ -2608,7 +3772,7 @@ function CommerceProjectEditor({ project, config, selectedImageId, onSelectImage
         onChange(nextConfig);
         onSelectImage(nextConfig.images[0]?.id || null);
       } catch {
-        alert("导入失败：JSON 格式不正确。");
+        alert("ʧܣJSON ʽȷ");
       }
     };
     reader.readAsText(file);
@@ -2618,11 +3782,11 @@ function CommerceProjectEditor({ project, config, selectedImageId, onSelectImage
     <aside className="commerce-project-editor">
       <div className="commerce-editor-head">
         <strong>详情页编辑控制台</strong>
-        <span>{selectedImage?.name || "未选择图片"}</span>
+        <span>{selectedImage?.name || "δѡͼƬ"}</span>
       </div>
 
       <label>
-        更换当前图片
+        替换当前图片
         <input
           type="file"
           accept="image/jpeg,image/png,image/webp"
@@ -2637,35 +3801,35 @@ function CommerceProjectEditor({ project, config, selectedImageId, onSelectImage
       </label>
 
       <label>
-        添加图片
+        ͼƬ
         <input type="file" multiple accept="image/jpeg,image/png,image/webp" onChange={(event) => addFiles(event.target.files)} />
       </label>
 
       {selectedImage && (
         <>
-          <CommerceEditorRange label="X 轴位置" value={selectedImage.x} min={-78} max={78} step={1} onChange={(value) => updateSelected({ x: value })} />
-          <CommerceEditorRange label="Y 轴位置" value={selectedImage.y} min={-78} max={78} step={1} onChange={(value) => updateSelected({ y: value })} />
+          <CommerceEditorRange label="X 偏移" value={selectedImage.x} min={-78} max={78} step={1} onChange={(value) => updateSelected({ x: value })} />
+          <CommerceEditorRange label="Y 偏移" value={selectedImage.y} min={-78} max={78} step={1} onChange={(value) => updateSelected({ y: value })} />
           <CommerceEditorRange label="宽度" value={selectedImage.width} min={20} max={190} step={1} suffix="%" onChange={(value) => updateSelected({ width: value })} />
-          <CommerceEditorRange label="等比例缩放" value={selectedImage.scale} min={0.25} max={3} step={0.05} onChange={(value) => updateSelected({ scale: value })} />
+          <CommerceEditorRange label="等比缩放" value={selectedImage.scale} min={0.25} max={3} step={0.05} onChange={(value) => updateSelected({ scale: value })} />
 
           <div className="commerce-editor-buttons">
-            <button type="button" onClick={() => updateSelected({ y: selectedImage.y - 4 })}>上移</button>
-            <button type="button" onClick={() => updateSelected({ y: selectedImage.y + 4 })}>下移</button>
-            <button type="button" onClick={() => updateSelected({ x: selectedImage.x - 4 })}>左移</button>
-            <button type="button" onClick={() => updateSelected({ x: selectedImage.x + 4 })}>右移</button>
-            <button type="button" onClick={() => updateSelected({ x: 0, y: 0 })}>居中</button>
-            <button type="button" onClick={() => updateSelected({ x: 0, y: 0, width: 100, scale: 1 })}>重置位置</button>
-            <button type="button" onClick={() => updateSelected({ scale: selectedImage.scale + 0.1 })}>放大</button>
-            <button type="button" onClick={() => updateSelected({ scale: selectedImage.scale - 0.1 })}>缩小</button>
-            <button type="button" onClick={() => updateSelected({ width: 100, scale: 1 })}>恢复原始尺寸</button>
-            <button type="button" onClick={() => updateSelected({ width: 100, x: 0, y: 0 })}>适应容器</button>
-            <button type="button" onClick={() => updateSelected({ width: 100 })}>填满宽度</button>
+            <button type="button" onClick={() => updateSelected({ y: selectedImage.y - 4 })}></button>
+            <button type="button" onClick={() => updateSelected({ y: selectedImage.y + 4 })}></button>
+            <button type="button" onClick={() => updateSelected({ x: selectedImage.x - 4 })}></button>
+            <button type="button" onClick={() => updateSelected({ x: selectedImage.x + 4 })}></button>
+            <button type="button" onClick={() => updateSelected({ x: 0, y: 0 })}></button>
+            <button type="button" onClick={() => updateSelected({ x: 0, y: 0, width: 100, scale: 1 })}>λ</button>
+            <button type="button" onClick={() => updateSelected({ scale: selectedImage.scale + 0.1 })}>Ŵ</button>
+            <button type="button" onClick={() => updateSelected({ scale: selectedImage.scale - 0.1 })}>С</button>
+            <button type="button" onClick={() => updateSelected({ width: 100, scale: 1 })}>ָԭʼߴ</button>
+            <button type="button" onClick={() => updateSelected({ width: 100, x: 0, y: 0 })}>Ӧ</button>
+            <button type="button" onClick={() => updateSelected({ width: 100 })}></button>
           </div>
 
           <div className="commerce-editor-buttons">
-            <button type="button" onClick={() => moveSelected(-1)}>向上移动</button>
-            <button type="button" onClick={() => moveSelected(1)}>向下移动</button>
-            <button type="button" onClick={deleteSelected}>删除图片</button>
+            <button type="button" onClick={() => moveSelected(-1)}>ƶ</button>
+            <button type="button" onClick={() => moveSelected(1)}>ƶ</button>
+            <button type="button" onClick={deleteSelected}>ɾͼƬ</button>
           </div>
         </>
       )}
@@ -2679,12 +3843,12 @@ function CommerceProjectEditor({ project, config, selectedImageId, onSelectImage
       </select>
 
       <div className="commerce-editor-actions">
-        <button type="button" onClick={onSave}>保存</button>
-        <button type="button" onClick={onCancel}>取消</button>
-        <button type="button" onClick={onReset}>重置</button>
-        <button type="button" onClick={exportConfig}>导出配置</button>
+        <button type="button" onClick={onSave}></button>
+        <button type="button" onClick={onCancel}>ȡ</button>
+        <button type="button" onClick={onReset}></button>
+        <button type="button" onClick={exportConfig}></button>
         <label>
-          导入配置
+          
           <input type="file" accept="application/json" onChange={(event) => importConfig(event.target.files?.[0])} />
         </label>
       </div>
@@ -2707,6 +3871,11 @@ function ProjectModulePage({ module, onBack, onOpenCommerceProject }) {
   const [previewItem, setPreviewItem] = useState(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const isCommerceModule = module.id === "commerce";
+  const hideRenderingLabels = module.id === "rendering";
+  const hideCommerceLabels = module.id === "commerce";
+  const hideAigcShowcase = module.id === "aigc";
+  const hideLongformShowcase = module.id === "longform";
+  const hideMotionHero = module.id === "motion";
   const [commerceGroups, setCommerceGroups] = useState(() => {
     const dataGroups = normalizeCommerceGroups((commerceWorksData as any).groups).groups;
     return dataGroups.length ? dataGroups : createCommerceGroupsFromModule(module).groups;
@@ -2768,10 +3937,10 @@ function ProjectModulePage({ module, onBack, onOpenCommerceProject }) {
         body: JSON.stringify({ groups: commerceGroups }),
       });
       const payload = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(payload.error || "保存失败");
+      if (!response.ok) throw new Error(payload.error || "ʧ");
       setSavedCommerceGroups(cloneCommerceGroups(commerceGroups));
     } catch (error) {
-      alert(`保存失败：${error instanceof Error ? error.message : String(error)}。请使用“导出JSON”备份当前数据。`);
+      alert(`ʧܣ${error instanceof Error ? error.message : String(error)}ʹáJSONݵǰݡ`);
     } finally {
       setCommerceSaving(false);
     }
@@ -2790,46 +3959,57 @@ function ProjectModulePage({ module, onBack, onOpenCommerceProject }) {
         </div>
       </nav>
 
-      <section className="project-page-hero-section">
-        <div className="container">
-          <button className="module-back" type="button" onClick={onBack}>
-            返回作品模块
-          </button>
+      {!hideRenderingLabels && !hideAigcShowcase && !hideLongformShowcase && !hideMotionHero && (
+        <section className="project-page-hero-section">
+          <div className="container">
+            {!hideMotionHero && (
+              <>
+                <button className="module-back" type="button" onClick={onBack}>
+                  返回作品模块
+                </button>
 
-          <div className="module-page-hero">
-            <div>
-              <span className="section-kicker">{module.tag}</span>
-              <h2 ref={titleRef} tabIndex={-1}>{module.title}</h2>
-            </div>
-            <p>{module.desc}</p>
+                <div className="module-page-hero">
+                  <div>
+                    <span className="section-kicker">{module.tag}</span>
+                    <h2 ref={titleRef} tabIndex={-1}>{module.title}</h2>
+                  </div>
+                  {!hideCommerceLabels && <p>{module.desc}</p>}
+                </div>
+              </>
+            )}
+
+            {isCommerceModule ? (
+              <Suspense fallback={<div className="commerce-showcase" aria-hidden="true" />}>
+                <CommerceShowcase module={module} />
+              </Suspense>
+            ) : !hideAigcShowcase ? (
+              <div className="module-page-cover">
+                <PortfolioMedia item={{ ...getModuleCoverItem(module), title: module.title }} preview />
+              </div>
+            ) : null}
           </div>
-
-          {isCommerceModule ? (
-            <CommerceShowcase module={module} />
-          ) : (
-            <div className="module-page-cover">
-              <PortfolioMedia item={{ ...getModuleCoverItem(module), title: module.title }} preview />
-            </div>
-          )}
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="project-page-works">
         <div className="container">
-          <div className="module-subhead">
-            <span>{isCommerceModule ? `${countCommerceWorks(commerceGroups)} Works` : module.meta}</span>
-            <h3>Works</h3>
-          </div>
+          {!hideRenderingLabels && !hideCommerceLabels && !hideAigcShowcase && !hideLongformShowcase && !hideMotionHero && (
+            <div className="module-subhead">
+              <span>{isCommerceModule ? `${countCommerceWorks(commerceGroups)} Works` : module.meta}</span>
+              <h3>Works</h3>
+            </div>
+          )}
 
           {isCommerceModule ? (
             <CommerceWorksAccordion groups={commerceGroups} onOpenProject={onOpenCommerceProject} />
+          ) : hideLongformShowcase ? (
+            <LongformShowcase module={module} onPreview={setPreviewItem} />
           ) : (
             <div className="portfolio-grid module-work-grid flat-work-grid">
               {module.works.map((item, index) => (
                 <article
                   className={`portfolio-card ${getMediaClass(item)}`}
                   key={item.src}
-                  style={{ animationDelay: `${470 + Math.min(index, 8) * 38}ms` }}
                   role="button"
                   tabIndex={0}
                   onClick={() => setPreviewItem(item)}
@@ -2848,9 +4028,9 @@ function ProjectModulePage({ module, onBack, onOpenCommerceProject }) {
           )}
         </div>
       </section>
-      {isCommerceModule && !commerceEditorOpen && ["localhost", "127.0.0.1"].includes(window.location.hostname) && (
+      {isCommerceModule && !commerceEditorOpen && import.meta.env.DEV && ["localhost", "127.0.0.1"].includes(window.location.hostname) && (
         <button className="commerce-works-edit-toggle" type="button" onClick={openCommerceEditor}>
-          编辑作品
+          ༭Ʒ
         </button>
       )}
       {isCommerceModule && commerceEditorOpen && (
@@ -2894,22 +4074,27 @@ function MediaPreview({ item, onClose }) {
 }
 
 function Strengths() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useGsapSectionScrubReveal(sectionRef, "strengths");
+
   return (
-    <section className="section strengths" id="strength">
+    <section ref={sectionRef} className="section strengths" id="strength">
       <div className="container">
         <div className="section-head compact">
-          <span className="section-kicker">个人优势</span>
           <h2>从“想法”到“上线素材”的连续生产能力。</h2>
         </div>
         <div className="strength-grid">
           {strengths.map(({ icon: Icon, title, text }) => (
-            <article className="strength-card" key={title}>
+            <div
+              className="strength-card"
+              key={title}
+            >
               <div className="icon-box">
                 <Icon size={24} />
               </div>
               <h3>{title}</h3>
               <p>{text}</p>
-            </article>
+            </div>
           ))}
         </div>
       </div>
@@ -2918,11 +4103,13 @@ function Strengths() {
 }
 
 function ContactEnd() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useGsapSectionScrubReveal(sectionRef, "contact");
+
   return (
-    <section className="end-contact" id="contact">
+    <section ref={sectionRef} className="end-contact" id="contact">
       <div className="container end-layout">
-        <div>
-          <span className="section-kicker">Contact</span>
+        <div className="end-heading-motion">
           <h2>期待一起打造更清晰、更有质感的视觉内容。</h2>
         </div>
         <div className="end-panel">

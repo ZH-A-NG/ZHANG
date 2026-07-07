@@ -96,6 +96,15 @@ function commerceWorksApi() {
 }
 
 export default defineConfig({
+  base: "/",
   assetsInclude: ["**/*.glb"],
   plugins: [react(), commerceWorksApi()],
+  esbuild: {
+    drop: ["console", "debugger"],
+  },
+  build: {
+    sourcemap: false,
+    cssCodeSplit: true,
+    assetsInlineLimit: 4096,
+  },
 });
